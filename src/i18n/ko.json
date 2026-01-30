@@ -1,0 +1,56 @@
+{
+  "common": {
+    "upload": "파일 업로드",
+    "download": "다운로드",
+    "downloadAll": "전체 다운로드",
+    "converting": "변환 중...",
+    "completed": "완료",
+    "failed": "실패",
+    "skip": "건너뛰기",
+    "cancel": "취소",
+    "retry": "다시 시도"
+  },
+  "splash": {
+    "tagline": "PDF ↔ Markdown 변환"
+  },
+  "upload": {
+    "dragDrop": "파일을 여기에 드래그하세요",
+    "or": "또는",
+    "browse": "파일 선택",
+    "maxFiles": "최대 {{count}}개 파일",
+    "maxSize": "파일당 최대 {{size}}MB",
+    "uploading": "업로드 중... ({{progress}}%)"
+  },
+  "conversion": {
+    "pdfToMd": "PDF → MD",
+    "mdToPdf": "MD → PDF",
+    "selectMode": "변환 방향을 선택하세요",
+    "pending": "대기 중",
+    "processing": "변환 중 ({{progress}}%)",
+    "completed": "변환 완료",
+    "failed": "변환 실패"
+  },
+  "error": {
+    "invalidFormat": "지원하지 않는 파일 형식입니다",
+    "fileTooLarge": "파일 크기가 너무 큽니다 (최대 {{size}}MB)",
+    "tooManyFiles": "파일 개수가 너무 많습니다 (최대 {{count}}개)",
+    "totalSizeTooLarge": "총 파일 크기가 너무 큽니다 (최대 {{size}}MB)",
+    "taskNotFound": "작업을 찾을 수 없습니다",
+    "conversionFailed": "변환 중 오류가 발생했습니다",
+    "networkError": "네트워크 연결을 확인해주세요",
+    "timeout": "요청 시간이 초과되었습니다",
+    "unknown": "알 수 없는 오류가 발생했습니다"
+  },
+  "status": {
+    "idle": "대기",
+    "uploading": "업로드 중",
+    "pending": "대기 중",
+    "processing": "처리 중",
+    "completed": "완료",
+    "failed": "실패"
+  },
+  "info": {
+    "fileRetention": "변환된 파일은 24시간 동안 보관됩니다",
+    "notionTip": "노션에 붙여넣으면 이미지가 자동으로 저장됩니다"
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "common": {
+    "upload": "Upload Files",
+    "download": "Download",
+    "downloadAll": "Download All",
+    "converting": "Converting...",
+    "completed": "Completed",
+    "failed": "Failed",
+    "skip": "Skip",
+    "cancel": "Cancel",
+    "retry": "Retry"
+  },
+  "splash": {
+    "tagline": "PDF ↔ Markdown Converter"
+  },
+  "upload": {
+    "dragDrop": "Drag and drop files here",
+    "or": "or",
+    "browse": "Browse Files",
+    "maxFiles": "Up to {{count}} files",
+    "maxSize": "Max {{size}}MB per file",
+    "uploading": "Uploading... ({{progress}}%)"
+  },
+  "conversion": {
+    "pdfToMd": "PDF → MD",
+    "mdToPdf": "MD → PDF",
+    "selectMode": "Select conversion mode",
+    "pending": "Pending",
+    "processing": "Converting ({{progress}}%)",
+    "completed": "Conversion complete",
+    "failed": "Conversion failed"
+  },
+  "error": {
+    "invalidFormat": "Unsupported file format",
+    "fileTooLarge": "File is too large (max {{size}}MB)",
+    "tooManyFiles": "Too many files (max {{count}})",
+    "totalSizeTooLarge": "Total file size too large (max {{size}}MB)",
+    "taskNotFound": "Task not found",
+    "conversionFailed": "Conversion failed",
+    "networkError": "Please check your network connection",
+    "timeout": "Request timed out",
+    "unknown": "An unknown error occurred"
+  },
+  "status": {
+    "idle": "Idle",
+    "uploading": "Uploading",
+    "pending": "Pending",
+    "processing": "Processing",
+    "completed": "Completed",
+    "failed": "Failed"
+  },
+  "info": {
+    "fileRetention": "Converted files are stored for 24 hours",
+    "notionTip": "Images will be saved automatically when pasted into Notion"
+  }
+}
