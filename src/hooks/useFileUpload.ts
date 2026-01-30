@@ -42,9 +42,17 @@ export function useFileUpload(options: UseFileUploadOptions): UseFileUploadRetur
       const valid: File[] = [];
       const invalid: Array<{ file: File; reason: string }> = [];
 
-      const totalCount = existingFileCount + fileArray.length;
-      if (totalCount > LIMITS.MAX_FILES) {
-        const allowedCount = LIMITS.MAX_FILES - existingFileCount;
+      const allowedCount = Math.max(0, LIMITS.MAX_FILES - existingFileCount);
+
+      if (allowedCount === 0) {
+        fileArray.forEach((file) => {
+          invalid.push({
+            file,
+            reason: t('error.tooManyFiles', { count: LIMITS.MAX_FILES }),
+          });
+        });
+        fileArray.length = 0;
+      } else if (fileArray.length > allowedCount) {
         fileArray.slice(allowedCount).forEach((file) => {
           invalid.push({
             file,

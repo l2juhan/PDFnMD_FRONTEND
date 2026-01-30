@@ -4,8 +4,18 @@ import ko from './ko.json';
 import en from './en.json';
 
 const STORAGE_KEY = 'pdfnmd_language';
-const savedLanguage = localStorage.getItem(STORAGE_KEY);
-const defaultLanguage = savedLanguage || 'ko';
+const isBrowser = typeof window !== 'undefined' && typeof localStorage !== 'undefined';
+
+const getSavedLanguage = (): string | null => {
+  if (!isBrowser) return null;
+  try {
+    return localStorage.getItem(STORAGE_KEY);
+  } catch {
+    return null;
+  }
+};
+
+const defaultLanguage = getSavedLanguage() || 'ko';
 
 i18n.use(initReactI18next).init({
   resources: {
@@ -23,8 +33,13 @@ i18n.use(initReactI18next).init({
 });
 
 i18n.on('languageChanged', (lng: string) => {
-  localStorage.setItem(STORAGE_KEY, lng);
-  document.documentElement.lang = lng;
+  if (!isBrowser) return;
+  try {
+    localStorage.setItem(STORAGE_KEY, lng);
+    document.documentElement.lang = lng;
+  } catch {
+    // localStorage 접근 실패 시 무시
+  }
 });
 
 export default i18n;

@@ -122,14 +122,19 @@ function transformToApiError(error: AxiosError): ApiError {
 function detectBadRequestType(message: string): ApiErrorCode {
   const lowerMessage = message.toLowerCase();
 
-  if (lowerMessage.includes('file type') || lowerMessage.includes('invalid')) {
-    return ApiErrorCode.INVALID_FILE_TYPE;
-  }
-  if (lowerMessage.includes('too many') || lowerMessage.includes('files')) {
+  // TOO_MANY_FILES: 파일 개수 초과 관련 메시지
+  if (/too many files|exceeds?\s*(the\s*)?(maximum\s*)?files?|maximum\s*files?\s*exceeded|file\s*count\s*exceeded|max(imum)?\s*\d+\s*files?/i.test(lowerMessage)) {
     return ApiErrorCode.TOO_MANY_FILES;
   }
-  if (lowerMessage.includes('large') || lowerMessage.includes('size')) {
+
+  // FILE_TOO_LARGE: 파일 크기 초과 관련 메시지
+  if (/file\s*(is\s*)?too\s*large|exceeds?\s*(the\s*)?(maximum\s*)?size|size\s*limit\s*exceeded|exceeded\s*\d+\s*mb|max(imum)?\s*size/i.test(lowerMessage)) {
     return ApiErrorCode.FILE_TOO_LARGE;
+  }
+
+  // INVALID_FILE_TYPE: 파일 타입 관련 메시지
+  if (/invalid\s*file\s*type|unsupported\s*file\s*type|wrong\s*file\s*type|file\s*type\s*(is\s*)?(not\s*)?(allowed|supported|valid)/i.test(lowerMessage)) {
+    return ApiErrorCode.INVALID_FILE_TYPE;
   }
 
   return ApiErrorCode.UNKNOWN;
@@ -202,10 +207,14 @@ export async function downloadBatch(taskIds: string[]): Promise<Blob> {
 }
 
 export async function checkHealth(): Promise<HealthResponse> {
-  const response = await axios.get<HealthResponse>(
-    API_BASE_URL.replace('/api', '') + '/health',
-    { timeout: 5000 }
-  );
+  // /api를 제거하고 /health 경로 구성
+  const url = new URL(API_BASE_URL);
+  url.pathname = '/health';
+
+  const response = await apiClient.get<HealthResponse>(url.toString(), {
+    baseURL: '', // apiClient baseURL 무시
+    timeout: 5000,
+  });
   return response.data;
 }
 
