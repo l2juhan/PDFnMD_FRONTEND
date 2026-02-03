@@ -42,4 +42,13 @@ i18n.on('languageChanged', (lng: string) => {
   }
 });
 
+// 초기화 시 document.documentElement.lang 설정 (SEO/접근성)
+if (isBrowser) {
+  try {
+    document.documentElement.lang = defaultLanguage;
+  } catch {
+    // 무시
+  }
+}
+
 export default i18n;

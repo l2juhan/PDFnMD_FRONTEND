@@ -169,9 +169,7 @@ export async function convertFile(
   formData.append('mode', mode);
 
   const response = await apiClient.post<ConvertResponse>('/convert', formData, {
-    headers: {
-      'Content-Type': 'multipart/form-data',
-    },
+    // Content-Type 헤더를 설정하지 않아 axios가 자동으로 multipart boundary 추가
     timeout: UPLOAD_CONFIG.TIMEOUT_MS,
     onUploadProgress: (progressEvent) => {
       if (progressEvent.total && onUploadProgress) {

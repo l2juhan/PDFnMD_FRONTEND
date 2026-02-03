@@ -45,7 +45,7 @@ VITE_API_URL=http://localhost:8000/api
 npm run dev
 ```
 
-개발 서버가 http://localhost:5174 에서 실행됩니다.
+개발 서버가 <http://localhost:5174> 에서 실행됩니다.
 
 ### 빌드
 
@@ -57,7 +57,7 @@ npm run build
 
 ## 프로젝트 구조
 
-```
+```text
 src/
 ├── constants/      # 상수 (제한값, 설정)
 ├── hooks/          # 커스텀 훅

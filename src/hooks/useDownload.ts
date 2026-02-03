@@ -24,7 +24,8 @@ export function useDownload(): UseDownloadReturn {
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
-    URL.revokeObjectURL(url);
+    // 다운로드가 시작될 시간을 주기 위해 revoke를 지연
+    setTimeout(() => URL.revokeObjectURL(url), 100);
   }, []);
 
   const downloadSingle = useCallback(
