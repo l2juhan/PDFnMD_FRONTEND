@@ -7,6 +7,7 @@ export const LIMITS = {
 
 export const ACCEPTED_FORMATS = {
   'pdf-to-md': ['application/pdf', '.pdf'],
+  'md-to-pdf': ['text/markdown', 'text/plain', '.md'],
 } as const;
 
 export const POLLING_CONFIG = {

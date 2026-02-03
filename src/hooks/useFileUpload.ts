@@ -87,8 +87,8 @@ export function useFileUpload(options: UseFileUploadOptions): UseFileUploadRetur
           continue;
         }
 
-        // 총 크기 체크를 먼저 수행 (파일 추가 전에 검사)
-        if (totalSize + fileSizeMB > LIMITS.MAX_TOTAL_SIZE_MB) {
+        totalSize += fileSizeMB;
+        if (totalSize > LIMITS.MAX_TOTAL_SIZE_MB) {
           invalid.push({
             file,
             reason: t('error.totalSizeTooLarge', { size: LIMITS.MAX_TOTAL_SIZE_MB }),
@@ -96,7 +96,6 @@ export function useFileUpload(options: UseFileUploadOptions): UseFileUploadRetur
           continue;
         }
 
-        totalSize += fileSizeMB;
         valid.push(file);
       }
 

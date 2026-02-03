@@ -1,10 +1,11 @@
 # PDFnMD Frontend
 
-PDF → Markdown 변환 웹 서비스의 프론트엔드입니다.
+PDF <-> Markdown 양방향 변환 웹 서비스의 프론트엔드입니다.
 
 ## 기능
 
-- **PDF → Markdown**: PDF 파일을 Markdown으로 변환
+- **PDF -> Markdown**: PDF 파일을 Markdown으로 변환
+- **Markdown -> PDF**: Markdown 파일을 PDF로 변환
 - **다중 파일 업로드**: 최대 20개 파일 동시 처리
 - **다국어 지원**: 한국어 / 영어
 

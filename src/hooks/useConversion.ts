@@ -87,9 +87,10 @@ export function useConversion(): UseConversionReturn {
 
   const getConvertedFilename = useCallback(
     (originalFilename: string): string => {
-      return originalFilename.replace(/\.pdf$/i, '.md');
+      const extension = mode === ConversionMode.PDF_TO_MD ? '.md' : '.pdf';
+      return originalFilename.replace(/\.(pdf|md)$/i, extension);
     },
-    []
+    [mode]
   );
 
   const downloadSingleFile = useCallback(

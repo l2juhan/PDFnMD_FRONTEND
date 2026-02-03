@@ -11,7 +11,7 @@
     "retry": "Retry"
   },
   "splash": {
-    "tagline": "PDF → Markdown Converter"
+    "tagline": "PDF ↔ Markdown Converter"
   },
   "upload": {
     "dragDrop": "Drag and drop files here",
@@ -23,6 +23,8 @@
   },
   "conversion": {
     "pdfToMd": "PDF → MD",
+    "mdToPdf": "MD → PDF",
+    "selectMode": "Select conversion mode",
     "pending": "Pending",
     "processing": "Converting ({{progress}}%)",
     "completed": "Conversion complete",

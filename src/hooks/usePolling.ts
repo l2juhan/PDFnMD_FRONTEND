@@ -36,7 +36,6 @@ export function usePolling(
       if (attemptsRef.current[fileId] > maxAttempts) {
         clearInterval(intervalsRef.current[fileId]);
         delete intervalsRef.current[fileId];
-        delete attemptsRef.current[fileId];
         updateFile(fileId, {
           status: TaskStatus.FAILED,
           error: 'Polling timeout',
@@ -89,7 +88,6 @@ export function usePolling(
 
     return () => {
       Object.values(intervalsRef.current).forEach(clearInterval);
-      intervalsRef.current = {};
     };
   }, [files, interval, pollFile]);
 
