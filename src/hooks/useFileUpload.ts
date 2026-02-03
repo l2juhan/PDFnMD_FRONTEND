@@ -87,14 +87,14 @@ export function useFileUpload(options: UseFileUploadOptions): UseFileUploadRetur
           continue;
         }
 
-        totalSize += fileSizeMB;
-        if (totalSize > LIMITS.MAX_TOTAL_SIZE_MB) {
+        if (totalSize + fileSizeMB > LIMITS.MAX_TOTAL_SIZE_MB) {
           invalid.push({
             file,
             reason: t('error.totalSizeTooLarge', { size: LIMITS.MAX_TOTAL_SIZE_MB }),
           });
           continue;
         }
+        totalSize += fileSizeMB;
 
         valid.push(file);
       }

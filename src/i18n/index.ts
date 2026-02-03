@@ -17,6 +17,14 @@ const getSavedLanguage = (): string | null => {
 
 const defaultLanguage = getSavedLanguage() || 'ko';
 
+if (isBrowser) {
+  try {
+    document.documentElement.lang = defaultLanguage;
+  } catch {
+    // document 접근 실패 시 무시
+  }
+}
+
 i18n.use(initReactI18next).init({
   resources: {
     ko: { translation: ko },
