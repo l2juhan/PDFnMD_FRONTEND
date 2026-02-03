@@ -9,7 +9,7 @@ import type {
   HealthResponse,
   TaskStatusResponse,
 } from '../types';
-import { UPLOAD_CONFIG } from '../constants/limits';
+import { LIMITS, UPLOAD_CONFIG } from '../constants/limits';
 
 // ===================================
 // Configuration
@@ -102,9 +102,10 @@ function transformToApiError(error: AxiosError): ApiError {
 
   if (status === 400) {
     const errorCode = detectBadRequestType(serverMessage);
+    const params = getErrorParams(errorCode);
     return {
       code: errorCode,
-      message: getLocalizedErrorMessage(errorCode),
+      message: getLocalizedErrorMessage(errorCode, params),
       statusCode: status,
       originalError: error,
     };
@@ -140,7 +141,18 @@ function detectBadRequestType(message: string): ApiErrorCode {
   return ApiErrorCode.UNKNOWN;
 }
 
-function getLocalizedErrorMessage(code: ApiErrorCode): string {
+function getErrorParams(code: ApiErrorCode): Record<string, unknown> | undefined {
+  switch (code) {
+    case ApiErrorCode.TOO_MANY_FILES:
+      return { count: LIMITS.MAX_FILES };
+    case ApiErrorCode.FILE_TOO_LARGE:
+      return { size: LIMITS.MAX_FILE_SIZE_MB };
+    default:
+      return undefined;
+  }
+}
+
+function getLocalizedErrorMessage(code: ApiErrorCode, params?: Record<string, unknown>): string {
   const messageMap: Record<ApiErrorCode, string> = {
     [ApiErrorCode.INVALID_FILE_TYPE]: 'error.invalidFormat',
     [ApiErrorCode.TOO_MANY_FILES]: 'error.tooManyFiles',
@@ -152,7 +164,7 @@ function getLocalizedErrorMessage(code: ApiErrorCode): string {
     [ApiErrorCode.UNKNOWN]: 'error.unknown',
   };
 
-  return i18n.t(messageMap[code]);
+  return i18n.t(messageMap[code], params);
 }
 
 // ===================================
@@ -208,10 +220,21 @@ export async function downloadBatch(taskIds: string[]): Promise<Blob> {
 
 export async function checkHealth(): Promise<HealthResponse> {
   // /api를 제거하고 /health 경로 구성
-  const url = new URL(API_BASE_URL);
-  url.pathname = '/health';
+  // 절대 경로인지 상대 경로인지 확인
+  const isAbsolute = /^https?:\/\//i.test(API_BASE_URL);
+  let healthUrl: string;
 
-  const response = await apiClient.get<HealthResponse>(url.toString(), {
+  if (isAbsolute) {
+    const url = new URL(API_BASE_URL);
+    url.pathname = '/health';
+    healthUrl = url.toString();
+  } else {
+    // 상대 경로인 경우 현재 origin 사용
+    const origin = typeof window !== 'undefined' ? window.location.origin : '';
+    healthUrl = `${origin}/health`;
+  }
+
+  const response = await apiClient.get<HealthResponse>(healthUrl, {
     baseURL: '', // apiClient baseURL 무시
     timeout: 5000,
   });
