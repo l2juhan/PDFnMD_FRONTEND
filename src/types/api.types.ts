@@ -4,7 +4,6 @@
 
 export const ConversionMode = {
   PDF_TO_MD: 'pdf-to-md',
-  MD_TO_PDF: 'md-to-pdf',
 } as const;
 
 export type ConversionMode = (typeof ConversionMode)[keyof typeof ConversionMode];

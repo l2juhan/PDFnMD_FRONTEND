@@ -11,7 +11,7 @@
     "retry": "다시 시도"
   },
   "splash": {
-    "tagline": "PDF ↔ Markdown 변환"
+    "tagline": "PDF → Markdown 변환"
   },
   "upload": {
     "dragDrop": "파일을 여기에 드래그하세요",
@@ -23,8 +23,6 @@
   },
   "conversion": {
     "pdfToMd": "PDF → MD",
-    "mdToPdf": "MD → PDF",
-    "selectMode": "변환 방향을 선택하세요",
     "pending": "대기 중",
     "processing": "변환 중 ({{progress}}%)",
     "completed": "변환 완료",
