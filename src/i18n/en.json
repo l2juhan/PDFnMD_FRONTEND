@@ -1,0 +1,105 @@
+{
+  "nav": {
+    "howToUse": "How to Use",
+    "features": "Features",
+    "faq": "FAQ"
+  },
+  "hero": {
+    "eyebrow": "Optimized for Notion",
+    "title": "Convert PDF Lectures\nto Markdown",
+    "subtitle": "Convert your lecture PDFs to Markdown with images and paste directly into Notion."
+  },
+  "demo": {
+    "caption": "Upload PDF → Convert → Paste to Notion"
+  },
+  "converter": {
+    "title": "Convert File",
+    "description": "Upload a PDF to convert it to Notion-compatible Markdown",
+    "selectFile": "Select File",
+    "fileHint": "PDF · Max 50MB",
+    "dropHint": "or drag and drop a PDF here",
+    "convert": "Convert to Markdown",
+    "converting": "Converting…",
+    "copy": "Copy to Clipboard",
+    "copied": "Copied!",
+    "failed": "Conversion Failed — Retry",
+    "remove": "Remove"
+  },
+  "howToUse": {
+    "label": "How to Use",
+    "title": "Three Simple Steps",
+    "steps": [
+      {
+        "title": "Upload PDF",
+        "description": "Select your lecture slides or PDF materials. Drag and drop also works."
+      },
+      {
+        "title": "Auto Convert",
+        "description": "We extract text and images, then convert to Markdown."
+      },
+      {
+        "title": "Paste to Notion",
+        "description": "Copy to clipboard and press Ctrl+V in Notion. Done."
+      }
+    ]
+  },
+  "features": {
+    "label": "Features",
+    "title": "Why PDFnMD",
+    "items": [
+      {
+        "title": "Auto Image Extraction",
+        "description": "Images from PDF are stored in cloud and included as URLs in Markdown."
+      },
+      {
+        "title": "Notion Optimized",
+        "description": "Converted to GFM format, so formatting is preserved when pasting to Notion."
+      },
+      {
+        "title": "24-Hour Storage",
+        "description": "Converted images are stored in cloud for 24 hours. Paste within that time."
+      },
+      {
+        "title": "Free",
+        "description": "Use immediately without sign-up. No cost at all."
+      }
+    ]
+  },
+  "faq": {
+    "label": "FAQ",
+    "title": "Frequently Asked Questions",
+    "items": [
+      {
+        "question": "How do I paste to Notion?",
+        "answer": "After conversion, click the copy button, then press Ctrl+V (Mac: Cmd+V) in your Notion page. Images will display automatically."
+      },
+      {
+        "question": "Where are images stored?",
+        "answer": "Images are stored in Cloudflare R2 cloud storage. They're auto-deleted after 24 hours. When you paste to Notion, Notion copies images to its own servers."
+      },
+      {
+        "question": "Is there a file size limit?",
+        "answer": "You can upload files up to 50MB."
+      },
+      {
+        "question": "Is my uploaded PDF safe?",
+        "answer": "PDF files are immediately deleted from our server after conversion. We don't store or analyze them."
+      }
+    ]
+  },
+  "footer": {
+    "copyright": "© 2025 PDFnMD",
+    "github": "GitHub",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service"
+  },
+  "toast": {
+    "conversionComplete": "Conversion complete — Click copy button",
+    "conversionFailed": "Conversion failed",
+    "copied": "Copied to clipboard",
+    "copyFailed": "Failed to copy",
+    "pdfOnly": "Only PDF files are allowed",
+    "fileTooLarge": "File size must be 50MB or less",
+    "timeout": "Conversion timed out"
+  }
+}
