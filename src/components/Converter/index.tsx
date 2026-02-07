@@ -17,9 +17,13 @@ export function Converter() {
   const { state, startConversion, copyToClipboard, retry, reset } =
     useConversion();
 
-  const handleFileSelect = useCallback((file: SelectedFileInfo) => {
-    setSelectedFile(file);
-  }, []);
+  const handleFileSelect = useCallback(
+    (file: SelectedFileInfo) => {
+      reset(); // 이전 상태 초기화 (failed 등 상태 클리어)
+      setSelectedFile(file);
+    },
+    [reset]
+  );
 
   const handleFileRemove = useCallback(() => {
     setSelectedFile(null);
