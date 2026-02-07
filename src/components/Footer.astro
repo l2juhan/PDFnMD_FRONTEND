@@ -5,26 +5,52 @@
  */
 ---
 
-<footer
-  class="border-t border-gray-300 py-6 flex items-center justify-between
-         text-[13px] text-gray-500
-         max-sm:flex-col max-sm:gap-3 max-sm:text-center"
->
+<footer class="footer">
   <span>&copy; 2026 PDFnMD</span>
-  <div class="flex gap-5">
+  <div class="footer-links">
     <a
       href="https://github.com/l2juhan/PDFnMD_FRONTEND"
       target="_blank"
       rel="noopener noreferrer"
-      class="text-gray-500 no-underline hover:text-black transition-colors"
     >
       GitHub
     </a>
-    <a href="#" class="text-gray-500 no-underline hover:text-black transition-colors">
-      개인정보처리방침
-    </a>
-    <a href="#" class="text-gray-500 no-underline hover:text-black transition-colors">
-      이용약관
-    </a>
+    <a href="#">개인정보처리방침</a>
+    <a href="#">이용약관</a>
   </div>
 </footer>
+
+<style>
+  .footer {
+    border-top: 1px solid var(--color-gray-300);
+    padding: 24px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 13px;
+    color: var(--color-gray-500);
+  }
+
+  .footer a {
+    color: var(--color-gray-500);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+
+  .footer a:hover {
+    color: var(--color-black);
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 20px;
+  }
+
+  @media (max-width: 640px) {
+    .footer {
+      flex-direction: column;
+      gap: 12px;
+      text-align: center;
+    }
+  }
+</style>

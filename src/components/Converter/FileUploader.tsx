@@ -90,15 +90,52 @@ export function FileUploader({
     }
   };
 
+  const buttonStyle: React.CSSProperties = {
+    display: 'inline-flex',
+    alignItems: 'center',
+    gap: '8px',
+    padding: '10px 28px',
+    backgroundColor: disabled ? '#ccc' : '#191919',
+    color: disabled ? '#888' : '#fff',
+    border: 'none',
+    borderRadius: '4px',
+    fontSize: '15px',
+    fontWeight: 500,
+    cursor: disabled ? 'not-allowed' : 'pointer',
+    transition: 'opacity 0.15s',
+  };
+
+  const dropzoneStyle: React.CSSProperties = {
+    width: '100%',
+    border: `1.5px dashed ${isDragOver ? '#191919' : '#e3e2de'}`,
+    borderRadius: '6px',
+    padding: '28px 24px',
+    textAlign: 'center',
+    backgroundColor: isDragOver ? '#f5f5f5' : '#fff',
+    minHeight: '80px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    transition: 'all 0.2s',
+    opacity: disabled ? 0.5 : 1,
+  };
+
   return (
-    <div className="flex flex-col items-center gap-3">
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        gap: '12px',
+      }}
+    >
       {/* 숨겨진 파일 입력 */}
       <input
         ref={inputRef}
         type="file"
         accept=".pdf"
         onChange={handleInputChange}
-        className="hidden"
+        style={{ display: 'none' }}
         disabled={disabled}
       />
 
@@ -107,14 +144,18 @@ export function FileUploader({
         type="button"
         onClick={handleButtonClick}
         disabled={disabled}
-        className="inline-flex items-center gap-2 px-7 py-2.5
-                   bg-black text-white border-none rounded-sm
-                   text-[15px] font-medium cursor-pointer
-                   hover:opacity-85 transition-opacity
-                   disabled:bg-gray-300 disabled:text-gray-500 disabled:cursor-not-allowed"
+        style={buttonStyle}
+        onMouseEnter={(e) => {
+          if (!disabled) {
+            e.currentTarget.style.opacity = '0.85';
+          }
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.opacity = '1';
+        }}
       >
         <svg
-          className="w-[18px] h-[18px]"
+          style={{ width: '18px', height: '18px' }}
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
@@ -130,7 +171,13 @@ export function FileUploader({
       </button>
 
       {/* 파일 힌트 */}
-      <span className="text-[13px] text-gray-500 -mt-1">
+      <span
+        style={{
+          fontSize: '13px',
+          color: '#888',
+          marginTop: '-4px',
+        }}
+      >
         PDF · 최대 {MAX_FILE_SIZE_MB}MB
       </span>
 
@@ -139,18 +186,7 @@ export function FileUploader({
         onDragOver={handleDragOver}
         onDragLeave={handleDragLeave}
         onDrop={handleDrop}
-        className={`
-          w-full border-[1.5px] border-dashed rounded-md
-          py-7 px-6 text-center bg-white min-h-[80px]
-          flex items-center justify-center
-          transition-all duration-200
-          ${
-            isDragOver
-              ? 'border-black bg-gray-100'
-              : 'border-gray-300'
-          }
-          ${disabled ? 'opacity-50 cursor-not-allowed' : ''}
-        `}
+        style={dropzoneStyle}
       >
         {selectedFile ? (
           <SelectedFile
@@ -159,7 +195,7 @@ export function FileUploader({
             disabled={disabled}
           />
         ) : (
-          <span className="text-[13px] text-gray-500">
+          <span style={{ fontSize: '13px', color: '#888' }}>
             또는 여기에 PDF를 드래그 앤 드롭
           </span>
         )}

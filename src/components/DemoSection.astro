@@ -1,19 +1,47 @@
 ---
 /**
  * DemoSection - 데모 비디오 영역
- * 16:9.5 비율 플레이스홀더 (추후 GIF/비디오로 교체)
+ * SaaS 스타일 와이드 비디오 플레이스홀더
  */
 ---
 
-<div class="mt-14">
-  <div
-    class="w-full bg-gray-100 rounded-xl border border-gray-300
-           shadow-[0_8px_40px_rgba(0,0,0,0.08),0_2px_8px_rgba(0,0,0,0.04)]
-           flex flex-col items-center justify-center gap-3 text-gray-500 overflow-hidden
-           aspect-[16/9.5]"
-  >
-    <!-- 실제 배포 시 교체: <img src="/demo.gif" alt="PDFnMD 사용 데모" class="w-full h-full object-cover rounded-xl" /> -->
-    <span class="text-[28px] text-gray-300 font-light">demo.gif</span>
-    <span class="text-[13px]">PDF 업로드 → 변환 → Notion 붙여넣기 GIF</span>
+<div class="demo-section">
+  <div class="demo-video">
+    <!-- 실제 배포 시 교체: <img src="/demo.gif" alt="PDFnMD 사용 데모" /> -->
+    <span class="demo-placeholder">demo.gif</span>
+    <span class="demo-caption">PDF 업로드 → 변환 → Notion 붙여넣기 GIF</span>
   </div>
 </div>
+
+<style>
+  .demo-section {
+    margin: 56px 0 0;
+  }
+
+  .demo-video {
+    width: 100%;
+    aspect-ratio: 16 / 9.5;
+    background: var(--color-gray-100);
+    border-radius: 12px;
+    border: 1px solid var(--color-gray-300);
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(0, 0, 0, 0.04);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    color: var(--color-gray-500);
+    overflow: hidden;
+    position: relative;
+  }
+
+  .demo-placeholder {
+    font-size: 28px;
+    color: var(--color-gray-300);
+    font-weight: 300;
+  }
+
+  .demo-caption {
+    font-size: 13px;
+  }
+</style>

@@ -14,7 +14,7 @@ const faqs = [
   },
   {
     question: '파일 크기 제한이 있나요?',
-    answer: '최대 50MB까지 업로드할 수 있습니다.'
+    answer: '최대 20MB까지 업로드할 수 있습니다.'
   },
   {
     question: '업로드한 PDF는 안전한가요?',
@@ -23,26 +23,19 @@ const faqs = [
 ];
 ---
 
-<section id="faq" class="py-16 border-t border-gray-300">
-  <p class="text-xs uppercase tracking-widest text-gray-500 mb-3">FAQ</p>
-  <h2 class="font-serif text-[28px] font-normal tracking-tight mb-8">자주 묻는 질문</h2>
+<section class="section" id="faq">
+  <p class="section-label">FAQ</p>
+  <h2 class="section-heading">자주 묻는 질문</h2>
 
   <div>
     {faqs.map((faq, index) => (
-      <div class="faq-item border-b border-gray-300" class:list={[index === 0 && 'border-t']}>
-        <button
-          class="faq-q flex items-center gap-2 w-full py-3.5
-                 bg-transparent border-none text-[15px] font-medium
-                 text-gray-900 cursor-pointer text-left"
-          data-faq-toggle
-        >
-          <span class="faq-arrow text-xs text-gray-500 transition-transform shrink-0">&#9656;</span>
+      <div class:list={['faq-item', index === 0 && 'first']}>
+        <button class="faq-q" data-faq-toggle>
+          <span class="faq-arrow">&#9656;</span>
           {faq.question}
         </button>
-        <div class="faq-a max-h-0 overflow-hidden transition-[max-height] duration-300 ease-out">
-          <p class="pb-3.5 pl-5 text-sm text-gray-700 leading-relaxed">
-            {faq.answer}
-          </p>
+        <div class="faq-a">
+          <p>{faq.answer}</p>
         </div>
       </div>
     ))}
@@ -50,11 +43,80 @@ const faqs = [
 </section>
 
 <style>
+  .section {
+    padding: 64px 0;
+  }
+
+  .section + .section {
+    border-top: 1px solid var(--color-gray-300);
+  }
+
+  .section-label {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-gray-500);
+    margin-bottom: 12px;
+  }
+
+  .section-heading {
+    font-family: 'Newsreader', Georgia, serif;
+    font-size: 28px;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    margin-bottom: 32px;
+  }
+
+  .faq-item {
+    border-bottom: 1px solid var(--color-gray-300);
+  }
+
+  .faq-item.first {
+    border-top: 1px solid var(--color-gray-300);
+  }
+
+  .faq-q {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    padding: 14px 0;
+    background: none;
+    border: none;
+    font-size: 15px;
+    font-weight: 500;
+    font-family: inherit;
+    color: var(--color-gray-900);
+    cursor: pointer;
+    text-align: left;
+  }
+
+  .faq-arrow {
+    font-size: 12px;
+    color: var(--color-gray-500);
+    transition: transform 0.2s;
+    flex-shrink: 0;
+  }
+
   .faq-item.open .faq-arrow {
     transform: rotate(90deg);
   }
+
+  .faq-a {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.25s ease;
+  }
+
   .faq-item.open .faq-a {
     max-height: 200px;
+  }
+
+  .faq-a p {
+    padding: 0 0 14px 20px;
+    font-size: 14px;
+    color: var(--color-gray-700);
+    line-height: 1.6;
   }
 </style>
 

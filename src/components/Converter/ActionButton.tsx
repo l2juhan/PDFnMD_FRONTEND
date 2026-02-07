@@ -19,29 +19,28 @@ export function ActionButton({
   disabled,
   onClick,
 }: ActionButtonProps) {
-  // 상태별 스타일
-  const getButtonClasses = () => {
-    const base = `
-      relative overflow-hidden flex items-center justify-center gap-2
-      w-full mt-4 py-3 px-6 border-none rounded-sm
-      text-[15px] font-medium font-sans transition-all duration-150
-    `;
-
+  // 상태별 배경색
+  const getBackgroundColor = () => {
     switch (state) {
       case 'idle':
-        return disabled
-          ? `${base} bg-gray-300 text-gray-500 cursor-not-allowed`
-          : `${base} bg-black text-white cursor-pointer hover:opacity-85`;
+        return disabled ? '#ccc' : '#191919';
       case 'converting':
-        return `${base} bg-gray-700 text-white cursor-wait`;
+        return '#444';
       case 'completed':
       case 'copied':
-        return `${base} bg-success text-white cursor-pointer hover:opacity-85`;
+        return '#22c55e';
       case 'failed':
-        return `${base} bg-error text-white cursor-pointer hover:opacity-85`;
+        return '#ef4444';
       default:
-        return base;
+        return '#191919';
     }
+  };
+
+  // 상태별 커서
+  const getCursor = () => {
+    if (disabled || state === 'converting') return 'not-allowed';
+    if (state === 'converting') return 'wait';
+    return 'pointer';
   };
 
   // 상태별 텍스트
@@ -80,24 +79,68 @@ export function ActionButton({
   const isDisabled =
     disabled || state === 'converting' || (state === 'idle' && disabled);
 
+  const buttonStyle: React.CSSProperties = {
+    position: 'relative',
+    overflow: 'hidden',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: '8px',
+    width: '100%',
+    marginTop: '16px',
+    padding: '12px 24px',
+    border: 'none',
+    borderRadius: '4px',
+    backgroundColor: getBackgroundColor(),
+    color: disabled && state === 'idle' ? '#888' : '#fff',
+    fontSize: '15px',
+    fontWeight: 500,
+    fontFamily: 'inherit',
+    cursor: getCursor(),
+    transition: 'all 0.15s',
+  };
+
   return (
     <button
       type="button"
       onClick={onClick}
       disabled={isDisabled}
-      className={getButtonClasses()}
+      style={buttonStyle}
+      onMouseEnter={(e) => {
+        if (!isDisabled) {
+          e.currentTarget.style.opacity = '0.85';
+        }
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.opacity = '1';
+      }}
     >
       {/* 프로그레스 fill */}
       {state === 'converting' && (
         <div
-          className="absolute top-0 left-0 h-full bg-white/[0.18]
-                     transition-[width] duration-300 ease-out pointer-events-none"
-          style={{ width: `${progress}%` }}
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            height: '100%',
+            width: `${progress}%`,
+            backgroundColor: 'rgba(255, 255, 255, 0.18)',
+            transition: 'width 0.3s ease-out',
+            pointerEvents: 'none',
+          }}
         />
       )}
 
       {/* 버튼 내용 */}
-      <span className="relative z-10 flex items-center gap-2">
+      <span
+        style={{
+          position: 'relative',
+          zIndex: 10,
+          display: 'flex',
+          alignItems: 'center',
+          gap: '8px',
+        }}
+      >
         {getButtonContent()}
       </span>
     </button>
@@ -108,8 +151,14 @@ export function ActionButton({
 function Spinner() {
   return (
     <div
-      className="w-4 h-4 border-2 border-white/30 border-t-white
-                 rounded-full animate-spin"
+      style={{
+        width: '16px',
+        height: '16px',
+        border: '2px solid rgba(255, 255, 255, 0.3)',
+        borderTopColor: '#fff',
+        borderRadius: '50%',
+        animation: 'spin 1s linear infinite',
+      }}
     />
   );
 }

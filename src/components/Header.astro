@@ -5,29 +5,79 @@
  */
 ---
 
-<nav class="flex items-center justify-between py-4 border-b border-gray-300">
-  <a href="/" class="flex items-center no-underline text-black">
-    <span class="font-semibold text-lg tracking-tight">PDFnMD</span>
+<nav class="nav">
+  <a href="/" class="nav-brand">
+    <span class="nav-name">PDFnMD</span>
   </a>
-  <div class="flex items-center gap-6">
-    <a href="#how" class="no-underline text-gray-700 text-sm hover:text-black transition-colors max-sm:hidden">
-      사용법
-    </a>
-    <a href="#features" class="no-underline text-gray-700 text-sm hover:text-black transition-colors max-sm:hidden">
-      특징
-    </a>
-    <a href="#faq" class="no-underline text-gray-700 text-sm hover:text-black transition-colors max-sm:hidden">
-      FAQ
-    </a>
-    <button
-      id="langBtn"
-      class="bg-transparent border border-gray-300 px-2.5 py-1 rounded-sm text-[13px]
-             text-gray-700 cursor-pointer hover:border-gray-700 transition-colors"
-    >
-      EN
-    </button>
+  <div class="nav-links">
+    <a href="#how">사용법</a>
+    <a href="#features">특징</a>
+    <a href="#faq">FAQ</a>
+    <button class="lang-btn" id="langBtn">EN</button>
   </div>
 </nav>
+
+<style>
+  .nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--color-gray-300);
+  }
+
+  .nav-brand {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: var(--color-black);
+  }
+
+  .nav-name {
+    font-weight: 600;
+    font-size: 18px;
+    letter-spacing: -0.02em;
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .nav-links a {
+    text-decoration: none;
+    color: var(--color-gray-700);
+    font-size: 14px;
+    transition: color 0.15s;
+  }
+
+  .nav-links a:hover {
+    color: var(--color-black);
+  }
+
+  .lang-btn {
+    background: none;
+    border: 1px solid var(--color-gray-300);
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-family: inherit;
+    color: var(--color-gray-700);
+    cursor: pointer;
+    transition: border-color 0.15s;
+  }
+
+  .lang-btn:hover {
+    border-color: var(--color-gray-700);
+  }
+
+  @media (max-width: 640px) {
+    .nav-links a:not(.lang-btn) {
+      display: none;
+    }
+  }
+</style>
 
 <script>
   const langBtn = document.getElementById('langBtn');

@@ -22,19 +22,73 @@ const steps = [
 ];
 ---
 
-<section id="how" class="py-16 border-t border-gray-300">
-  <p class="text-xs uppercase tracking-widest text-gray-500 mb-3">사용 방법</p>
-  <h2 class="font-serif text-[28px] font-normal tracking-tight mb-8">세 단계로 끝납니다</h2>
+<section class="section" id="how">
+  <p class="section-label">사용 방법</p>
+  <h2 class="section-heading">세 단계로 끝납니다</h2>
 
-  <div class="grid grid-cols-3 gap-8 max-sm:grid-cols-1 max-sm:gap-6">
+  <div class="steps">
     {steps.map((step) => (
-      <div>
-        <div class="font-serif text-[32px] font-light text-gray-300 mb-2 leading-none">
-          {step.num}
-        </div>
-        <h3 class="text-[15px] font-semibold mb-1.5">{step.title}</h3>
-        <p class="text-sm text-gray-700 leading-relaxed">{step.description}</p>
+      <div class="step">
+        <div class="step-num">{step.num}</div>
+        <h3>{step.title}</h3>
+        <p>{step.description}</p>
       </div>
     ))}
   </div>
 </section>
+
+<style>
+  .section {
+    padding: 64px 0;
+  }
+
+  .section-label {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-gray-500);
+    margin-bottom: 12px;
+  }
+
+  .section-heading {
+    font-family: 'Newsreader', Georgia, serif;
+    font-size: 28px;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    margin-bottom: 32px;
+  }
+
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+  }
+
+  .step-num {
+    font-family: 'Newsreader', Georgia, serif;
+    font-size: 32px;
+    font-weight: 300;
+    color: var(--color-gray-300);
+    margin-bottom: 8px;
+    line-height: 1;
+  }
+
+  .step h3 {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+
+  .step p {
+    font-size: 14px;
+    color: var(--color-gray-700);
+    line-height: 1.5;
+  }
+
+  @media (max-width: 640px) {
+    .steps {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+  }
+</style>

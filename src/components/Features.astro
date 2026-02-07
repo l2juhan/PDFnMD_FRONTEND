@@ -23,16 +23,72 @@ const features = [
 ];
 ---
 
-<section id="features" class="py-16 border-t border-gray-300">
-  <p class="text-xs uppercase tracking-widest text-gray-500 mb-3">특징</p>
-  <h2 class="font-serif text-[28px] font-normal tracking-tight mb-8">왜 PDFnMD인가</h2>
+<section class="section" id="features">
+  <p class="section-label">특징</p>
+  <h2 class="section-heading">왜 PDFnMD인가</h2>
 
-  <div class="grid grid-cols-2 gap-6 max-sm:grid-cols-1">
+  <div class="features">
     {features.map((feature) => (
-      <div class="p-5 border border-gray-300 rounded-md">
-        <h3 class="text-[15px] font-semibold mb-1.5">{feature.title}</h3>
-        <p class="text-sm text-gray-700 leading-relaxed">{feature.description}</p>
+      <div class="feature">
+        <h3>{feature.title}</h3>
+        <p>{feature.description}</p>
       </div>
     ))}
   </div>
 </section>
+
+<style>
+  .section {
+    padding: 64px 0;
+  }
+
+  .section + .section {
+    border-top: 1px solid var(--color-gray-300);
+  }
+
+  .section-label {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-gray-500);
+    margin-bottom: 12px;
+  }
+
+  .section-heading {
+    font-family: 'Newsreader', Georgia, serif;
+    font-size: 28px;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    margin-bottom: 32px;
+  }
+
+  .features {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+
+  .feature {
+    padding: 20px;
+    border: 1px solid var(--color-gray-300);
+    border-radius: 6px;
+  }
+
+  .feature h3 {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+
+  .feature p {
+    font-size: 14px;
+    color: var(--color-gray-700);
+    line-height: 1.5;
+  }
+
+  @media (max-width: 640px) {
+    .features {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

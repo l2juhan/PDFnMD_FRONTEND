@@ -66,14 +66,35 @@ export function Converter() {
 
       <section
         id="convert"
-        className="my-16 p-10 border border-gray-300 rounded-lg bg-white
-                   max-w-[720px] mx-auto max-sm:p-6 max-sm:my-12"
+        style={{
+          margin: '64px auto',
+          padding: '40px',
+          border: '1px solid #e3e2de',
+          borderRadius: '8px',
+          background: '#ffffff',
+          maxWidth: '720px',
+        }}
       >
         {/* 타이틀 */}
-        <h2 className="font-serif text-[22px] font-normal text-center mb-1">
+        <h2
+          style={{
+            fontFamily: "'Newsreader', Georgia, serif",
+            fontSize: '22px',
+            fontWeight: 400,
+            textAlign: 'center',
+            marginBottom: '4px',
+          }}
+        >
           파일 변환
         </h2>
-        <p className="text-center text-sm text-gray-500 mb-7">
+        <p
+          style={{
+            textAlign: 'center',
+            fontSize: '14px',
+            color: '#999',
+            marginBottom: '28px',
+          }}
+        >
           PDF를 업로드하면 Notion 호환 마크다운으로 변환합니다
         </p>
 

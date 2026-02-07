@@ -13,26 +13,68 @@ interface SelectedFileProps {
 
 export function SelectedFile({ file, onRemove, disabled }: SelectedFileProps) {
   return (
-    <div className="flex items-center gap-3 w-full">
+    <div
+      style={{
+        display: 'flex',
+        alignItems: 'center',
+        gap: '12px',
+        width: '100%',
+      }}
+    >
       {/* PDF 아이콘 박스 */}
       <div
-        className="w-10 h-10 bg-gray-100 border border-gray-300 rounded-md
-                   flex items-center justify-center shrink-0"
+        style={{
+          width: '40px',
+          height: '40px',
+          backgroundColor: '#f5f5f5',
+          border: '1px solid #e3e2de',
+          borderRadius: '6px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          flexShrink: 0,
+        }}
       >
-        <span className="text-[11px] font-semibold text-error uppercase">
+        <span
+          style={{
+            fontSize: '11px',
+            fontWeight: 600,
+            color: '#ef4444',
+            textTransform: 'uppercase',
+          }}
+        >
           PDF
         </span>
       </div>
 
       {/* 파일 정보 */}
-      <div className="flex-1 min-w-0 text-left">
+      <div
+        style={{
+          flex: 1,
+          minWidth: 0,
+          textAlign: 'left',
+        }}
+      >
         <div
-          className="text-sm font-medium text-gray-900
-                     whitespace-nowrap overflow-hidden text-ellipsis"
+          style={{
+            fontSize: '14px',
+            fontWeight: 500,
+            color: '#191919',
+            whiteSpace: 'nowrap',
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+          }}
         >
           {file.name}
         </div>
-        <div className="text-xs text-gray-500">{file.sizeFormatted}</div>
+        <div
+          style={{
+            fontSize: '12px',
+            color: '#888',
+          }}
+        >
+          {file.sizeFormatted}
+        </div>
       </div>
 
       {/* 제거 버튼 */}
@@ -40,9 +82,25 @@ export function SelectedFile({ file, onRemove, disabled }: SelectedFileProps) {
         type="button"
         onClick={onRemove}
         disabled={disabled}
-        className="shrink-0 bg-transparent border-none text-gray-500
-                   cursor-pointer text-lg px-2 py-1 transition-colors
-                   hover:text-error disabled:opacity-50 disabled:cursor-not-allowed"
+        style={{
+          flexShrink: 0,
+          backgroundColor: 'transparent',
+          border: 'none',
+          color: '#888',
+          cursor: disabled ? 'not-allowed' : 'pointer',
+          fontSize: '18px',
+          padding: '4px 8px',
+          transition: 'color 0.15s',
+          opacity: disabled ? 0.5 : 1,
+        }}
+        onMouseEnter={(e) => {
+          if (!disabled) {
+            e.currentTarget.style.color = '#ef4444';
+          }
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.color = '#888';
+        }}
         title="제거"
         aria-label="파일 제거"
       >
