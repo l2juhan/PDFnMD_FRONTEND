@@ -64,37 +64,10 @@ export function Converter() {
         }}
       />
 
-      <section
-        id="convert"
-        style={{
-          margin: '64px auto',
-          padding: '40px',
-          border: '1px solid #e3e2de',
-          borderRadius: '8px',
-          background: '#ffffff',
-          maxWidth: '720px',
-        }}
-      >
+      <section className="converter" id="convert">
         {/* 타이틀 */}
-        <h2
-          style={{
-            fontFamily: "'Newsreader', Georgia, serif",
-            fontSize: '22px',
-            fontWeight: 400,
-            textAlign: 'center',
-            marginBottom: '4px',
-          }}
-        >
-          파일 변환
-        </h2>
-        <p
-          style={{
-            textAlign: 'center',
-            fontSize: '14px',
-            color: '#999',
-            marginBottom: '28px',
-          }}
-        >
+        <h2 className="converter-title">파일 변환</h2>
+        <p className="converter-desc">
           PDF를 업로드하면 Notion 호환 마크다운으로 변환합니다
         </p>
 

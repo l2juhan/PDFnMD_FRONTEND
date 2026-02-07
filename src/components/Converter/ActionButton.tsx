@@ -19,28 +19,20 @@ export function ActionButton({
   disabled,
   onClick,
 }: ActionButtonProps) {
-  // 상태별 배경색
-  const getBackgroundColor = () => {
+  // 상태별 클래스
+  const getStateClass = () => {
     switch (state) {
-      case 'idle':
-        return disabled ? '#ccc' : '#191919';
       case 'converting':
-        return '#444';
+        return 'state-converting';
       case 'completed':
+        return 'state-completed';
       case 'copied':
-        return '#22c55e';
+        return 'state-copied';
       case 'failed':
-        return '#ef4444';
+        return 'state-failed';
       default:
-        return '#191919';
+        return '';
     }
-  };
-
-  // 상태별 커서
-  const getCursor = () => {
-    if (disabled || state === 'converting') return 'not-allowed';
-    if (state === 'converting') return 'wait';
-    return 'pointer';
   };
 
   // 상태별 텍스트
@@ -51,7 +43,7 @@ export function ActionButton({
       case 'converting':
         return (
           <>
-            <Spinner />
+            <div className="spinner" />
             변환 중… {Math.round(progress)}%
           </>
         );
@@ -79,86 +71,21 @@ export function ActionButton({
   const isDisabled =
     disabled || state === 'converting' || (state === 'idle' && disabled);
 
-  const buttonStyle: React.CSSProperties = {
-    position: 'relative',
-    overflow: 'hidden',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: '8px',
-    width: '100%',
-    marginTop: '16px',
-    padding: '12px 24px',
-    border: 'none',
-    borderRadius: '4px',
-    backgroundColor: getBackgroundColor(),
-    color: disabled && state === 'idle' ? '#888' : '#fff',
-    fontSize: '15px',
-    fontWeight: 500,
-    fontFamily: 'inherit',
-    cursor: getCursor(),
-    transition: 'all 0.15s',
-  };
-
   return (
     <button
       type="button"
       onClick={onClick}
       disabled={isDisabled}
-      style={buttonStyle}
-      onMouseEnter={(e) => {
-        if (!isDisabled) {
-          e.currentTarget.style.opacity = '0.85';
-        }
-      }}
-      onMouseLeave={(e) => {
-        e.currentTarget.style.opacity = '1';
-      }}
+      className={`action-btn ${getStateClass()}`}
     >
       {/* 프로그레스 fill */}
-      {state === 'converting' && (
-        <div
-          style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            height: '100%',
-            width: `${progress}%`,
-            backgroundColor: 'rgba(255, 255, 255, 0.18)',
-            transition: 'width 0.3s ease-out',
-            pointerEvents: 'none',
-          }}
-        />
-      )}
+      <div
+        className="btn-fill"
+        style={{ width: state === 'converting' ? `${progress}%` : '0%' }}
+      />
 
       {/* 버튼 내용 */}
-      <span
-        style={{
-          position: 'relative',
-          zIndex: 10,
-          display: 'flex',
-          alignItems: 'center',
-          gap: '8px',
-        }}
-      >
-        {getButtonContent()}
-      </span>
+      <span className="btn-label">{getButtonContent()}</span>
     </button>
-  );
-}
-
-// 스피너 컴포넌트
-function Spinner() {
-  return (
-    <div
-      style={{
-        width: '16px',
-        height: '16px',
-        border: '2px solid rgba(255, 255, 255, 0.3)',
-        borderTopColor: '#fff',
-        borderRadius: '50%',
-        animation: 'spin 1s linear infinite',
-      }}
-    />
   );
 }

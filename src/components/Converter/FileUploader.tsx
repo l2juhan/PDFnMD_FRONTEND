@@ -90,52 +90,15 @@ export function FileUploader({
     }
   };
 
-  const buttonStyle: React.CSSProperties = {
-    display: 'inline-flex',
-    alignItems: 'center',
-    gap: '8px',
-    padding: '10px 28px',
-    backgroundColor: disabled ? '#ccc' : '#191919',
-    color: disabled ? '#888' : '#fff',
-    border: 'none',
-    borderRadius: '4px',
-    fontSize: '15px',
-    fontWeight: 500,
-    cursor: disabled ? 'not-allowed' : 'pointer',
-    transition: 'opacity 0.15s',
-  };
-
-  const dropzoneStyle: React.CSSProperties = {
-    width: '100%',
-    border: `1.5px dashed ${isDragOver ? '#191919' : '#e3e2de'}`,
-    borderRadius: '6px',
-    padding: '28px 24px',
-    textAlign: 'center',
-    backgroundColor: isDragOver ? '#f5f5f5' : '#fff',
-    minHeight: '80px',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    transition: 'all 0.2s',
-    opacity: disabled ? 0.5 : 1,
-  };
-
   return (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        gap: '12px',
-      }}
-    >
+    <div className="upload-controls">
       {/* 숨겨진 파일 입력 */}
       <input
         ref={inputRef}
         type="file"
         accept=".pdf"
         onChange={handleInputChange}
-        style={{ display: 'none' }}
+        className="file-input"
         disabled={disabled}
       />
 
@@ -144,18 +107,9 @@ export function FileUploader({
         type="button"
         onClick={handleButtonClick}
         disabled={disabled}
-        style={buttonStyle}
-        onMouseEnter={(e) => {
-          if (!disabled) {
-            e.currentTarget.style.opacity = '0.85';
-          }
-        }}
-        onMouseLeave={(e) => {
-          e.currentTarget.style.opacity = '1';
-        }}
+        className="file-select-btn"
       >
         <svg
-          style={{ width: '18px', height: '18px' }}
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
@@ -171,22 +125,15 @@ export function FileUploader({
       </button>
 
       {/* 파일 힌트 */}
-      <span
-        style={{
-          fontSize: '13px',
-          color: '#888',
-          marginTop: '-4px',
-        }}
-      >
-        PDF · 최대 {MAX_FILE_SIZE_MB}MB
-      </span>
+      <span className="file-select-hint">PDF · 최대 {MAX_FILE_SIZE_MB}MB</span>
 
       {/* 드롭존 */}
       <div
         onDragOver={handleDragOver}
         onDragLeave={handleDragLeave}
         onDrop={handleDrop}
-        style={dropzoneStyle}
+        className={`drop-zone ${isDragOver ? 'drag-over' : ''}`}
+        style={{ opacity: disabled ? 0.5 : 1 }}
       >
         {selectedFile ? (
           <SelectedFile
@@ -195,9 +142,7 @@ export function FileUploader({
             disabled={disabled}
           />
         ) : (
-          <span style={{ fontSize: '13px', color: '#888' }}>
-            또는 여기에 PDF를 드래그 앤 드롭
-          </span>
+          <span className="drop-hint">또는 여기에 PDF를 드래그 앤 드롭</span>
         )}
       </div>
     </div>
