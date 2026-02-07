@@ -8,7 +8,7 @@ import AdBanner from '../components/AdBanner.astro';
 import Header from '../components/Header.astro';
 import Hero from '../components/Hero.astro';
 import DemoSection from '../components/DemoSection.astro';
-import ConverterPlaceholder from '../components/ConverterPlaceholder.astro';
+import { Converter } from '../components/Converter';
 import HowToUse from '../components/HowToUse.astro';
 import Features from '../components/Features.astro';
 import FAQ from '../components/FAQ.astro';
@@ -33,8 +33,8 @@ import Footer from '../components/Footer.astro';
   </div>
 
   <div class="container">
-    <!-- 파일 변환 (플레이스홀더 - Issue #16에서 React Island로 교체) -->
-    <ConverterPlaceholder />
+    <!-- 파일 변환 (React Island) -->
+    <Converter client:load />
 
     <!-- 사용 방법 -->
     <HowToUse />
