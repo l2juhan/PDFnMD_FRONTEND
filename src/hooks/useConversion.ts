@@ -54,7 +54,7 @@ export function useConversion() {
       copiedTimeoutRef.current = null;
     }
     setState(initialState);
-  }, [polling]);
+  }, [polling.stop]);
 
   const startConversion = useCallback(
     async (file: File) => {
@@ -124,7 +124,7 @@ export function useConversion() {
         // toast는 axios interceptor에서 처리
       }
     },
-    [polling, setProgress]
+    [polling.start, setProgress]
   );
 
   const copyToClipboard = useCallback(async () => {
