@@ -1,1 +1,83 @@
 @import "tailwindcss";
+
+/* ===== Custom Theme (Notion-style) ===== */
+@theme {
+  /* Colors */
+  --color-black: #191919;
+  --color-gray-900: #37352f;
+  --color-gray-700: #5a5a5a;
+  --color-gray-500: #999999;
+  --color-gray-300: #e3e2de;
+  --color-gray-200: #f1f1ef;
+  --color-gray-100: #f7f6f3;
+  --color-white: #ffffff;
+  --color-success: #2e7d32;
+  --color-error: #c62828;
+
+  /* Border Radius */
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+  --radius-full: 100px;
+
+  /* Font Family */
+  --font-sans: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-serif: 'Newsreader', Georgia, 'Times New Roman', serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+}
+
+/* ===== Base Styles ===== */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: var(--color-white);
+  color: var(--color-gray-900);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* ===== Utility Classes ===== */
+.font-serif {
+  font-family: var(--font-serif);
+}
+
+.font-mono {
+  font-family: var(--font-mono);
+}
+
+/* Container */
+.container {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.container-wide {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+@media (max-width: 640px) {
+  .container,
+  .container-wide {
+    padding: 0 16px;
+  }
+}
+
+/* ===== Spinner Animation ===== */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin {
+  animation: spin 0.6s linear infinite;
+}
