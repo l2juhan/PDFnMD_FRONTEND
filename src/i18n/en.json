@@ -99,7 +99,11 @@
     "copied": "Copied to clipboard",
     "copyFailed": "Failed to copy",
     "pdfOnly": "Only PDF files are allowed",
-    "fileTooLarge": "File size must be 50MB or less",
-    "timeout": "Conversion timed out"
+    "fileTooLarge": "File size is too large",
+    "timeout": "Request timed out",
+    "networkError": "Cannot connect to server",
+    "unsupportedFormat": "Unsupported file format",
+    "serverError": "Server error occurred",
+    "unknownError": "An unknown error occurred"
   }
 }

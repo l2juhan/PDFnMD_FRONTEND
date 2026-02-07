@@ -5,6 +5,7 @@
 
 import axios, { AxiosError, type InternalAxiosRequestConfig } from 'axios';
 import toast from 'react-hot-toast';
+import i18n from '../i18n';
 import type { ApiError } from '../types';
 
 // 환경 변수에서 API URL 가져오기 (Astro public env)
@@ -37,26 +38,26 @@ api.interceptors.request.use(
 api.interceptors.response.use(
   (response) => response,
   (error: AxiosError<ApiError>) => {
-    // 에러 메시지 추출
-    let message = '알 수 없는 오류가 발생했습니다';
+    let message: string;
 
     if (error.response?.data?.detail) {
+      // 서버에서 온 메시지는 그대로 사용
       message = error.response.data.detail;
     } else if (error.message === 'Network Error') {
-      message = '서버에 연결할 수 없습니다';
+      message = i18n.t('toast.networkError');
     } else if (error.code === 'ECONNABORTED') {
-      message = '요청 시간이 초과되었습니다';
+      message = i18n.t('toast.timeout');
     } else if (error.response?.status === 413) {
-      message = '파일 크기가 너무 큽니다';
+      message = i18n.t('toast.fileTooLarge');
     } else if (error.response?.status === 415) {
-      message = '지원하지 않는 파일 형식입니다';
+      message = i18n.t('toast.unsupportedFormat');
     } else if (error.response?.status === 500) {
-      message = '서버 오류가 발생했습니다';
+      message = i18n.t('toast.serverError');
+    } else {
+      message = i18n.t('toast.unknownError');
     }
 
-    // 토스트 알림 표시
     toast.error(message);
-
     return Promise.reject(error);
   }
 );
