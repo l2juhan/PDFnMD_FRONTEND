@@ -3,7 +3,7 @@
  * 일정 간격으로 콜백을 실행하고 조건 충족 시 중단
  */
 
-import { useRef, useCallback } from 'react';
+import { useRef, useCallback, useEffect } from 'react';
 
 interface UsePollingOptions {
   interval: number;
@@ -69,6 +69,13 @@ export function usePolling(options: UsePollingOptions): UsePollingReturn {
     },
     [interval, maxCount, onMaxReached, stop]
   );
+
+  // 컴포넌트 언마운트 시 타이머 정리
+  useEffect(() => {
+    return () => {
+      stop();
+    };
+  }, [stop]);
 
   return {
     start,
