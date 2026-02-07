@@ -1,0 +1,41 @@
+---
+/**
+ * Header - 네비게이션 바
+ * 로고, 메뉴 링크, 언어 버튼
+ */
+---
+
+<nav class="flex items-center justify-between py-4 border-b border-gray-300">
+  <a href="/" class="flex items-center no-underline text-black">
+    <span class="font-semibold text-lg tracking-tight">PDFnMD</span>
+  </a>
+  <div class="flex items-center gap-6">
+    <a href="#how" class="no-underline text-gray-700 text-sm hover:text-black transition-colors max-sm:hidden">
+      사용법
+    </a>
+    <a href="#features" class="no-underline text-gray-700 text-sm hover:text-black transition-colors max-sm:hidden">
+      특징
+    </a>
+    <a href="#faq" class="no-underline text-gray-700 text-sm hover:text-black transition-colors max-sm:hidden">
+      FAQ
+    </a>
+    <button
+      id="langBtn"
+      class="bg-transparent border border-gray-300 px-2.5 py-1 rounded-sm text-[13px]
+             text-gray-700 cursor-pointer hover:border-gray-700 transition-colors"
+    >
+      EN
+    </button>
+  </div>
+</nav>
+
+<script>
+  const langBtn = document.getElementById('langBtn');
+  langBtn?.addEventListener('click', () => {
+    if (langBtn.textContent === 'EN') {
+      langBtn.textContent = 'KO';
+    } else {
+      langBtn.textContent = 'EN';
+    }
+  });
+</script>
