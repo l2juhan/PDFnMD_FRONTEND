@@ -8,7 +8,14 @@ import tailwindcss from '@tailwindcss/vite';
 export default defineConfig({
   integrations: [react()],
 
+  server: {
+    port: 5174
+  },
+
   vite: {
-    plugins: [tailwindcss()]
+    plugins: [tailwindcss()],
+    server: {
+      strictPort: true
+    }
   }
 });
