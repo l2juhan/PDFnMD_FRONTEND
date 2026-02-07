@@ -126,6 +126,11 @@ export function useConversion() {
       setButtonState('copied');
       toast.success('클립보드에 복사됨');
 
+      // 이전 타이머 정리 (빠른 클릭 시 중복 방지)
+      if (copiedTimeoutRef.current) {
+        clearTimeout(copiedTimeoutRef.current);
+      }
+
       // 1.5초 후 completed로 복귀
       copiedTimeoutRef.current = setTimeout(() => {
         setState((prev) => {
