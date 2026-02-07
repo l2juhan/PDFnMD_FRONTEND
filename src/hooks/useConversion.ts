@@ -82,16 +82,25 @@ export function useConversion() {
           setProgress(status.progress);
 
           if (status.status === 'completed') {
-            // 3. 콘텐츠 조회
-            const contentResponse = await getContent(task_id);
-            setState((prev) => ({
-              ...prev,
-              buttonState: 'completed',
-              progress: 100,
-              content: contentResponse.content,
-            }));
-            toast.success('변환 완료 — 복사 버튼을 눌러주세요');
-            return true; // 폴링 중단
+            // 3. 콘텐츠 조회 (별도 에러 처리)
+            try {
+              const contentResponse = await getContent(task_id);
+              setState((prev) => ({
+                ...prev,
+                buttonState: 'completed',
+                progress: 100,
+                content: contentResponse.content,
+              }));
+              toast.success('변환 완료 — 복사 버튼을 눌러주세요');
+            } catch {
+              setState((prev) => ({
+                ...prev,
+                buttonState: 'failed',
+                error: '결과를 가져오는데 실패했습니다',
+              }));
+              toast.error('결과를 가져오는데 실패했습니다');
+            }
+            return true; // 폴링 중단 (성공/실패 무관)
           }
 
           if (status.status === 'failed') {
