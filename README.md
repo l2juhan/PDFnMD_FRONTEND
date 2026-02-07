@@ -14,7 +14,7 @@ PDF를 GFM(GitHub Flavored Markdown)으로 변환하는 웹 서비스의 프론�
 
 | 기능 | 설명 |
 |------|------|
-| PDF 업로드 | 단일 파일 업로드 (최대 20MB) |
+| PDF 업로드 | 단일 파일 업로드 (최대 50MB) |
 | 변환 상태 표시 | 실시간 진행률 (폴링 2초 간격) |
 | 클립보드 복사 | 변환된 GFM 텍스트 복사 |
 | 다국어 지원 | 한국어/영어 전환 |
@@ -54,21 +54,22 @@ src/
 ├── pages/           # Astro 페이지
 │   └── index.astro  # 메인 페이지
 ├── components/      # React 컴포넌트 (Islands)
-│   ├── FileUploader.tsx
-│   ├── ConversionStatus.tsx
-│   ├── ResultViewer.tsx
-│   └── LanguageSwitcher.tsx
 ├── layouts/         # 공통 레이아웃
-│   └── Layout.astro
 ├── styles/          # 전역 스타일
 │   └── global.css   # Tailwind 임포트
-├── services/        # API 통신
-│   └── api.ts
+├── api/             # API 통신 (axios)
+│   ├── index.ts     # axios 인스턴스 + 인터셉터
+│   ├── convert.ts   # POST /convert
+│   ├── status.ts    # GET /status/{task_id}
+│   ├── content.ts   # GET /content/{task_id}
+│   └── exports.ts   # 통합 export
 ├── types/           # TypeScript 타입
-├── constants/       # 상수 정의
-├── i18n/            # 다국어 리소스
-│   ├── ko.json
-│   └── en.json
+│   ├── api.ts       # API 요청/응답 타입
+│   └── index.ts
+├── i18n/            # 다국어 리소스 (i18next)
+│   ├── index.ts     # i18next 설정
+│   ├── ko.json      # 한국어
+│   └── en.json      # 영어
 └── hooks/           # React 커스텀 훅
 ```
 
