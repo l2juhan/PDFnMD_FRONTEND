@@ -54,11 +54,16 @@ src/
 ├── pages/           # Astro 페이지
 │   └── index.astro  # 메인 페이지
 ├── components/      # Astro/React 컴포넌트
+│   ├── Converter/            # 파일 변환 (React Island)
+│   │   ├── index.tsx         # 메인 컴포넌트
+│   │   ├── FileUploader.tsx  # 파일 선택/드래그 앤 드롭
+│   │   ├── SelectedFile.tsx  # 선택된 파일 표시
+│   │   ├── ActionButton.tsx  # 상태별 버튼 + 프로그레스
+│   │   └── types.ts          # 타입 정의
 │   ├── AdBanner.astro        # 광고 배너 플레이스홀더
 │   ├── Header.astro          # 네비게이션
 │   ├── Hero.astro            # 히어로 섹션
 │   ├── DemoSection.astro     # 데모 GIF 영역
-│   ├── ConverterPlaceholder.astro  # 변환기 UI (→ React Island)
 │   ├── HowToUse.astro        # 사용 방법 3단계
 │   ├── Features.astro        # 특징 그리드
 │   ├── FAQ.astro             # FAQ 아코디언
@@ -82,6 +87,8 @@ src/
 │   ├── ko.json      # 한국어
 │   └── en.json      # 영어
 └── hooks/           # React 커스텀 훅
+    ├── useConversion.ts  # 변환 로직 (상태 머신 + API)
+    └── usePolling.ts     # 폴링 유틸리티
 ```
 
 ## 환경 변수
@@ -110,10 +117,10 @@ PUBLIC_API_URL=http://localhost:8000/api
 │                         │                               │
 │  ┌─────────────────────────────────────────────────┐    │
 │  │           React Islands (client:load)           │    │
-│  │  ┌──────────────┐  ┌──────────────────────────┐ │    │
-│  │  │ FileUploader │  │ ConversionStatus         │ │    │
-│  │  │              │  │ (폴링 + 상태 표시)       │ │    │
-│  │  └──────────────┘  └──────────────────────────┘ │    │
+│  │  ┌──────────────────────────────────────────┐   │    │
+│  │  │               Converter                  │   │    │
+│  │  │  FileUploader + ActionButton + 상태머신  │   │    │
+│  │  └──────────────────────────────────────────┘   │    │
 │  └─────────────────────────────────────────────────┘    │
 └─────────────────────────────────────────────────────────┘
                           │
