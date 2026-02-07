@@ -4,7 +4,7 @@
  */
 
 import { api } from './index';
-import type { ConvertRequest, ConvertResponse, ConversionMode } from '../types';
+import type { ConvertRequest, ConvertResponse } from '../types';
 
 export async function convertFile(request: ConvertRequest): Promise<ConvertResponse> {
   const formData = new FormData();
@@ -19,6 +19,6 @@ export async function convertFile(request: ConvertRequest): Promise<ConvertRespo
 export async function convertPdfToMarkdown(file: File): Promise<ConvertResponse> {
   return convertFile({
     file,
-    mode: 'pdf-to-md' as ConversionMode,
+    mode: 'pdf-to-md',
   });
 }
