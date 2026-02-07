@@ -38,7 +38,7 @@ npm install
 npm run dev
 ```
 
-http://localhost:4321 에서 확인
+http://localhost:5173 에서 확인
 
 ### 프로덕션 빌드
 
