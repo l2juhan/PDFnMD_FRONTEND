@@ -1,17 +1,51 @@
 ---
-
+/**
+ * 메인 페이지
+ * 모든 섹션 컴포넌트 조합
+ */
+import Layout from '../layouts/Layout.astro';
+import AdBanner from '../components/AdBanner.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import DemoSection from '../components/DemoSection.astro';
+import ConverterPlaceholder from '../components/ConverterPlaceholder.astro';
+import HowToUse from '../components/HowToUse.astro';
+import Features from '../components/Features.astro';
+import FAQ from '../components/FAQ.astro';
+import Footer from '../components/Footer.astro';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout>
+  <!-- 광고 배너 -->
+  <AdBanner />
+
+  <div class="container">
+    <!-- 네비게이션 -->
+    <Header />
+
+    <!-- 히어로 -->
+    <Hero />
+  </div>
+
+  <!-- 데모 (와이드) -->
+  <div class="container-wide">
+    <DemoSection />
+  </div>
+
+  <div class="container">
+    <!-- 파일 변환 (플레이스홀더 - Issue #16에서 React Island로 교체) -->
+    <ConverterPlaceholder />
+
+    <!-- 사용 방법 -->
+    <HowToUse />
+
+    <!-- 특징 -->
+    <Features />
+
+    <!-- FAQ -->
+    <FAQ />
+
+    <!-- 푸터 -->
+    <Footer />
+  </div>
+</Layout>
