@@ -10,7 +10,7 @@ const currentYear = new Date().getFullYear();
   <span>&copy; {currentYear} PDFnMD</span>
   <div class="footer-links">
     <a href="https://github.com/l2juhan/PDFnMD_BACKEND" target="_blank" rel="noopener noreferrer">GitHub</a>
-    <a href="#">개인정보처리방침</a>
-    <a href="#">이용약관</a>
+    <button type="button" class="footer-link-btn" onclick="window.dispatchEvent(new CustomEvent('open-privacy-policy'))">개인정보처리방침</button>
+    <button type="button" class="footer-link-btn" onclick="window.dispatchEvent(new CustomEvent('open-terms-of-service'))">이용약관</button>
   </div>
 </footer>
