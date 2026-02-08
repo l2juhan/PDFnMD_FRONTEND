@@ -613,6 +613,26 @@ body {
   gap: 20px;
 }
 
+.footer-link-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: inherit;
+  font-size: inherit;
+  color: var(--gray-500);
+  cursor: pointer;
+  transition: color 0.15s;
+}
+
+.footer-link-btn:hover {
+  color: var(--black);
+}
+
+.footer-link-btn:focus-visible {
+  outline: 2px solid var(--black);
+  outline-offset: 2px;
+}
+
 /* ===== RESPONSIVE ===== */
 @media (max-width: 640px) {
   .container,
@@ -654,5 +674,137 @@ body {
     flex-direction: column;
     gap: 12px;
     text-align: center;
+  }
+}
+
+/* ===== LEGAL SHEET (슬라이드업 팝업) ===== */
+.legal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  animation: fadeIn 0.3s ease;
+}
+
+.legal-overlay-entering {
+  animation: fadeIn 0.3s ease;
+}
+
+.legal-sheet {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  max-height: 80vh;
+  background: var(--white);
+  border-radius: 12px 12px 0 0;
+  z-index: 1001;
+  display: flex;
+  flex-direction: column;
+  animation: slideUp 0.3s ease;
+}
+
+.legal-sheet-entering {
+  animation: slideUp 0.3s ease;
+}
+
+.legal-sheet-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--gray-300);
+  flex-shrink: 0;
+}
+
+.legal-sheet-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--black);
+  margin: 0;
+}
+
+.legal-sheet-close {
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: var(--gray-500);
+  cursor: pointer;
+  padding: 4px 8px;
+  line-height: 1;
+  transition: color 0.15s;
+}
+
+.legal-sheet-close:hover {
+  color: var(--black);
+}
+
+.legal-sheet-close:focus-visible {
+  outline: 2px solid var(--black);
+  outline-offset: 2px;
+}
+
+.legal-sheet-content {
+  padding: 20px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+/* 마크다운 스타일 */
+.legal-h1 {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--black);
+  margin: 0 0 8px 0;
+}
+
+.legal-h2 {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--black);
+  margin: 24px 0 12px 0;
+}
+
+.legal-p {
+  font-size: 14px;
+  color: var(--gray-700);
+  line-height: 1.6;
+  margin: 0 0 8px 0;
+}
+
+.legal-italic {
+  font-style: italic;
+  color: var(--gray-500);
+}
+
+.legal-li {
+  font-size: 14px;
+  color: var(--gray-700);
+  line-height: 1.6;
+  margin: 4px 0 4px 20px;
+}
+
+.legal-hr {
+  border: none;
+  border-top: 1px solid var(--gray-300);
+  margin: 20px 0;
+}
+
+/* 애니메이션 */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
   }
 }
