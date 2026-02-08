@@ -3,60 +3,49 @@
  * FAQ - 자주 묻는 질문 섹션
  * 아코디언 UI
  */
-const faqs = [
-  {
-    question: 'Notion에 어떻게 붙여넣나요?',
-    answer: '변환 완료 후 클립보드에 복사 버튼을 누르고, Notion 페이지에서 Ctrl+V (Mac: Cmd+V) 하면 됩니다. 이미지도 자동으로 표시됩니다.'
-  },
-  {
-    question: '이미지는 어디에 저장되나요?',
-    answer: 'Cloudflare R2 클라우드 스토리지에 저장됩니다. 24시간 후 자동 삭제되며, Notion에 붙여넣으면 Notion이 자체 서버에 이미지를 복사합니다.'
-  },
-  {
-    question: '파일 크기 제한이 있나요?',
-    answer: '최대 50MB까지 업로드할 수 있습니다.'
-  },
-  {
-    question: '업로드한 PDF는 안전한가요?',
-    answer: 'PDF 파일은 변환 완료 후 서버에서 즉시 삭제됩니다. 별도로 저장하거나 분석하지 않습니다.'
-  }
-];
 ---
 
-<section id="faq" class="py-16 border-t border-gray-300">
-  <p class="text-xs uppercase tracking-widest text-gray-500 mb-3">FAQ</p>
-  <h2 class="font-serif text-[28px] font-normal tracking-tight mb-8">자주 묻는 질문</h2>
+<section class="section" id="faq">
+  <p class="section-label">FAQ</p>
+  <h2 class="section-heading">자주 묻는 질문</h2>
 
-  <div>
-    {faqs.map((faq, index) => (
-      <div class="faq-item border-b border-gray-300" class:list={[index === 0 && 'border-t']}>
-        <button
-          class="faq-q flex items-center gap-2 w-full py-3.5
-                 bg-transparent border-none text-[15px] font-medium
-                 text-gray-900 cursor-pointer text-left"
-          data-faq-toggle
-        >
-          <span class="faq-arrow text-xs text-gray-500 transition-transform shrink-0">&#9656;</span>
-          {faq.question}
-        </button>
-        <div class="faq-a max-h-0 overflow-hidden transition-[max-height] duration-300 ease-out">
-          <p class="pb-3.5 pl-5 text-sm text-gray-700 leading-relaxed">
-            {faq.answer}
-          </p>
-        </div>
-      </div>
-    ))}
+  <div class="faq-item">
+    <button class="faq-q" data-faq-toggle>
+      <span class="faq-arrow">&#9656;</span>
+      Notion에 어떻게 붙여넣나요?
+    </button>
+    <div class="faq-a">
+      <p>변환 완료 후 클립보드에 복사 버튼을 누르고, Notion 페이지에서 Ctrl+V (Mac: Cmd+V) 하면 됩니다. 이미지도 자동으로 표시됩니다.</p>
+    </div>
+  </div>
+  <div class="faq-item">
+    <button class="faq-q" data-faq-toggle>
+      <span class="faq-arrow">&#9656;</span>
+      이미지는 어디에 저장되나요?
+    </button>
+    <div class="faq-a">
+      <p>Cloudflare R2 클라우드 스토리지에 저장됩니다. 24시간 후 자동 삭제되며, Notion에 붙여넣으면 Notion이 자체 서버에 이미지를 복사합니다.</p>
+    </div>
+  </div>
+  <div class="faq-item">
+    <button class="faq-q" data-faq-toggle>
+      <span class="faq-arrow">&#9656;</span>
+      파일 크기 제한이 있나요?
+    </button>
+    <div class="faq-a">
+      <p>최대 20MB까지 업로드할 수 있습니다.</p>
+    </div>
+  </div>
+  <div class="faq-item">
+    <button class="faq-q" data-faq-toggle>
+      <span class="faq-arrow">&#9656;</span>
+      업로드한 PDF는 안전한가요?
+    </button>
+    <div class="faq-a">
+      <p>PDF 파일은 변환 완료 후 서버에서 즉시 삭제됩니다. 별도로 저장하거나 분석하지 않습니다.</p>
+    </div>
   </div>
 </section>
-
-<style>
-  .faq-item.open .faq-arrow {
-    transform: rotate(90deg);
-  }
-  .faq-item.open .faq-a {
-    max-height: 200px;
-  }
-</style>
 
 <script>
   document.querySelectorAll('[data-faq-toggle]').forEach((btn) => {

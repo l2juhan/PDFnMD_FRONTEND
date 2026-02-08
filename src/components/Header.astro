@@ -5,31 +5,20 @@
  */
 ---
 
-<nav class="flex items-center justify-between py-4 border-b border-gray-300">
-  <a href="/" class="flex items-center no-underline text-black">
-    <span class="font-semibold text-lg tracking-tight">PDFnMD</span>
+<nav class="nav">
+  <a href="/" class="nav-brand">
+    <span class="nav-name">PDFnMD</span>
   </a>
-  <div class="flex items-center gap-6">
-    <a href="#how" class="no-underline text-gray-700 text-sm hover:text-black transition-colors max-sm:hidden">
-      사용법
-    </a>
-    <a href="#features" class="no-underline text-gray-700 text-sm hover:text-black transition-colors max-sm:hidden">
-      특징
-    </a>
-    <a href="#faq" class="no-underline text-gray-700 text-sm hover:text-black transition-colors max-sm:hidden">
-      FAQ
-    </a>
-    <button
-      id="langBtn"
-      class="bg-transparent border border-gray-300 px-2.5 py-1 rounded-sm text-[13px]
-             text-gray-700 cursor-pointer hover:border-gray-700 transition-colors"
-    >
-      EN
-    </button>
+  <div class="nav-links">
+    <a href="#how">사용법</a>
+    <a href="#features">특징</a>
+    <a href="#faq">FAQ</a>
+    <button class="lang-btn" id="langBtn">EN</button>
   </div>
 </nav>
 
 <script>
+  // TODO: i18n 연결 필요 (현재 버튼 텍스트만 토글하는 스텁 상태)
   const langBtn = document.getElementById('langBtn');
   langBtn?.addEventListener('click', () => {
     if (langBtn.textContent === 'EN') {

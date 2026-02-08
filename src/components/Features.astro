@@ -3,36 +3,28 @@
  * Features - 특징 섹션
  * 2×2 그리드
  */
-const features = [
-  {
-    title: '이미지 자동 추출',
-    description: 'PDF 내 이미지를 클라우드에 저장하고 마크다운에 URL로 포함합니다.'
-  },
-  {
-    title: 'Notion 최적화',
-    description: 'GFM 형식으로 변환해서 Notion에 붙여넣으면 서식이 그대로 유지됩니다.'
-  },
-  {
-    title: '24시간 보관',
-    description: '변환된 이미지는 24시간 동안 클라우드에 보관됩니다. 그 안에 붙여넣으세요.'
-  },
-  {
-    title: '무료',
-    description: '회원가입 없이 바로 사용할 수 있습니다. 비용은 없습니다.'
-  }
-];
 ---
 
-<section id="features" class="py-16 border-t border-gray-300">
-  <p class="text-xs uppercase tracking-widest text-gray-500 mb-3">특징</p>
-  <h2 class="font-serif text-[28px] font-normal tracking-tight mb-8">왜 PDFnMD인가</h2>
+<section class="section" id="features">
+  <p class="section-label">특징</p>
+  <h2 class="section-heading">왜 PDFnMD인가</h2>
 
-  <div class="grid grid-cols-2 gap-6 max-sm:grid-cols-1">
-    {features.map((feature) => (
-      <div class="p-5 border border-gray-300 rounded-md">
-        <h3 class="text-[15px] font-semibold mb-1.5">{feature.title}</h3>
-        <p class="text-sm text-gray-700 leading-relaxed">{feature.description}</p>
-      </div>
-    ))}
+  <div class="features">
+    <div class="feature">
+      <h3>이미지 자동 추출</h3>
+      <p>PDF 내 이미지를 클라우드에 저장하고 마크다운에 URL로 포함합니다.</p>
+    </div>
+    <div class="feature">
+      <h3>Notion 최적화</h3>
+      <p>GFM 형식으로 변환해서 Notion에 붙여넣으면 서식이 그대로 유지됩니다.</p>
+    </div>
+    <div class="feature">
+      <h3>24시간 보관</h3>
+      <p>변환된 이미지는 24시간 동안 클라우드에 보관됩니다. 그 안에 붙여넣으세요.</p>
+    </div>
+    <div class="feature">
+      <h3>무료</h3>
+      <p>회원가입 없이 바로 사용할 수 있습니다. 비용은 없습니다.</p>
+    </div>
   </div>
 </section>

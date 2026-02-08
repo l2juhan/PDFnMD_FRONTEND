@@ -3,28 +3,14 @@
  * Footer - 푸터
  * 저작권, GitHub 링크, 개인정보/약관 링크
  */
+const currentYear = new Date().getFullYear();
 ---
 
-<footer
-  class="border-t border-gray-300 py-6 flex items-center justify-between
-         text-[13px] text-gray-500
-         max-sm:flex-col max-sm:gap-3 max-sm:text-center"
->
-  <span>&copy; 2026 PDFnMD</span>
-  <div class="flex gap-5">
-    <a
-      href="https://github.com/l2juhan/PDFnMD_FRONTEND"
-      target="_blank"
-      rel="noopener noreferrer"
-      class="text-gray-500 no-underline hover:text-black transition-colors"
-    >
-      GitHub
-    </a>
-    <a href="#" class="text-gray-500 no-underline hover:text-black transition-colors">
-      개인정보처리방침
-    </a>
-    <a href="#" class="text-gray-500 no-underline hover:text-black transition-colors">
-      이용약관
-    </a>
+<footer class="footer">
+  <span>&copy; {currentYear} PDFnMD</span>
+  <div class="footer-links">
+    <a href="https://github.com/l2juhan/PDFnMD_BACKEND" target="_blank" rel="noopener noreferrer">GitHub</a>
+    <a href="#">개인정보처리방침</a>
+    <a href="#">이용약관</a>
   </div>
 </footer>
