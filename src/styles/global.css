@@ -28,6 +28,20 @@ body {
   line-height: 1.6;
 }
 
+/* ===== 키보드 접근성: Focus 스타일 ===== */
+.action-btn:focus-visible,
+.file-select-btn:focus-visible,
+.lang-btn:focus-visible,
+.faq-q:focus-visible,
+.file-remove:focus-visible {
+  outline: 2px solid var(--black);
+  outline-offset: 2px;
+}
+
+.action-btn:disabled:focus-visible {
+  outline: none;
+}
+
 /* ===== AD ===== */
 .ad-banner {
   width: 100%;
@@ -628,7 +642,7 @@ body {
     grid-template-columns: 1fr;
   }
 
-  .nav-links a:not(.lang-btn) {
+  .nav-links a {
     display: none;
   }
 

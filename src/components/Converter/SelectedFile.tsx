@@ -33,7 +33,10 @@ export function SelectedFile({ file, onRemove, disabled }: SelectedFileProps) {
         className="file-remove"
         title="제거"
         aria-label="파일 제거"
-        style={{ opacity: disabled ? 0.5 : 1 }}
+        style={{
+          opacity: disabled ? 0.5 : 1,
+          cursor: disabled ? 'not-allowed' : 'pointer',
+        }}
       >
         ×
       </button>
