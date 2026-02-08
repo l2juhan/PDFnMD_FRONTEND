@@ -76,7 +76,18 @@ export function useConversion() {
 
         // 2. 폴링 시작
         polling.start(async () => {
-          const status = await getStatus(task_id);
+          let status;
+          try {
+            status = await getStatus(task_id);
+          } catch {
+            // 상태 조회 실패 시 (404 등) failed로 전환하고 폴링 중단
+            setState((prev) => ({
+              ...prev,
+              buttonState: 'failed',
+              error: '변환 상태 조회에 실패했습니다',
+            }));
+            return true; // 폴링 중단
+          }
 
           // 진행률 업데이트
           setProgress(status.progress);
