@@ -91,9 +91,11 @@ interface LegalSheetProps {
   initialOpen?: SheetType;
 }
 
+type AnimState = 'idle' | 'entering' | 'leaving';
+
 export function LegalSheet({ initialOpen = null }: LegalSheetProps) {
   const [openSheet, setOpenSheet] = useState<SheetType>(initialOpen);
-  const [isAnimating, setIsAnimating] = useState(false);
+  const [animState, setAnimState] = useState<AnimState>('idle');
   const sheetRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLElement | null>(null);
 
@@ -104,15 +106,15 @@ export function LegalSheet({ initialOpen = null }: LegalSheetProps) {
   const openSheetByType = useCallback((type: SheetType) => {
     triggerRef.current = document.activeElement as HTMLElement;
     setOpenSheet(type);
-    setIsAnimating(true);
+    setAnimState('entering');
   }, []);
 
   // 시트 닫기
   const closeSheet = useCallback(() => {
-    setIsAnimating(true);
+    setAnimState('leaving');
     setTimeout(() => {
       setOpenSheet(null);
-      setIsAnimating(false);
+      setAnimState('idle');
       // 포커스 복귀
       triggerRef.current?.focus();
     }, 200);
@@ -139,11 +141,11 @@ export function LegalSheet({ initialOpen = null }: LegalSheetProps) {
 
   // 애니메이션 완료 후 상태 업데이트
   useEffect(() => {
-    if (openSheet && isAnimating) {
-      const timer = setTimeout(() => setIsAnimating(false), 300);
+    if (openSheet && animState === 'entering') {
+      const timer = setTimeout(() => setAnimState('idle'), 300);
       return () => clearTimeout(timer);
     }
-  }, [openSheet, isAnimating]);
+  }, [openSheet, animState]);
 
   // 포커스 트랩
   useEffect(() => {
@@ -214,12 +216,14 @@ export function LegalSheet({ initialOpen = null }: LegalSheetProps) {
             </p>
           );
         }
-        // 리스트
+        // 리스트 (ul/ol 없이 <li>는 invalid HTML이므로 <p>로 렌더링)
         if (line.startsWith('- ')) {
-          return <li key={i} className="legal-li">{line.slice(2)}</li>;
+          return <p key={i} className="legal-li">• {line.slice(2)}</p>;
         }
         if (/^\d+\. /.test(line)) {
-          return <li key={i} className="legal-li">{line.replace(/^\d+\. /, '')}</li>;
+          const match = line.match(/^(\d+)\./);
+          const num = match ? match[1] : '';
+          return <p key={i} className="legal-li">{num}. {line.replace(/^\d+\. /, '')}</p>;
         }
         // 구분선
         if (line === '---') {
@@ -244,7 +248,7 @@ export function LegalSheet({ initialOpen = null }: LegalSheetProps) {
     <>
       {/* 오버레이 */}
       <div
-        className={`legal-overlay ${isAnimating ? 'legal-overlay-entering' : ''}`}
+        className={`legal-overlay ${animState === 'entering' ? 'legal-overlay-entering' : ''} ${animState === 'leaving' ? 'legal-overlay-leaving' : ''}`}
         onClick={closeSheet}
         aria-hidden="true"
       />
@@ -252,7 +256,7 @@ export function LegalSheet({ initialOpen = null }: LegalSheetProps) {
       {/* 시트 */}
       <div
         ref={sheetRef}
-        className={`legal-sheet ${isAnimating && openSheet ? 'legal-sheet-entering' : ''}`}
+        className={`legal-sheet ${animState === 'entering' ? 'legal-sheet-entering' : ''} ${animState === 'leaving' ? 'legal-sheet-leaving' : ''}`}
         role="dialog"
         aria-modal="true"
         aria-labelledby="legal-sheet-title"
@@ -273,7 +277,7 @@ export function LegalSheet({ initialOpen = null }: LegalSheetProps) {
         </div>
 
         {/* 콘텐츠 */}
-        <div className="legal-sheet-content">
+        <div className="legal-sheet-content" tabIndex={0}>
           {renderMarkdown(content)}
         </div>
       </div>

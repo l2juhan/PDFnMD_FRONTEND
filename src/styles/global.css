@@ -683,11 +683,14 @@ body {
   inset: 0;
   background: rgba(0, 0, 0, 0.5);
   z-index: 1000;
-  animation: fadeIn 0.3s ease;
 }
 
 .legal-overlay-entering {
   animation: fadeIn 0.3s ease;
+}
+
+.legal-overlay-leaving {
+  animation: fadeOut 0.2s ease forwards;
 }
 
 .legal-sheet {
@@ -701,11 +704,14 @@ body {
   z-index: 1001;
   display: flex;
   flex-direction: column;
-  animation: slideUp 0.3s ease;
 }
 
 .legal-sheet-entering {
   animation: slideUp 0.3s ease;
+}
+
+.legal-sheet-leaving {
+  animation: slideDown 0.2s ease forwards;
 }
 
 .legal-sheet-header {
@@ -806,5 +812,23 @@ body {
   }
   to {
     transform: translateY(0);
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(100%);
   }
 }
