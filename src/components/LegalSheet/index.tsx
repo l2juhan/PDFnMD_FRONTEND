@@ -193,6 +193,15 @@ export function LegalSheet({ initialOpen = null }: LegalSheetProps) {
     };
   }, [openSheetByType]);
 
+  // 인라인 볼드 처리 함수
+  const renderInline = (text: string) => {
+    if (!text.includes('**')) return text;
+    const parts = text.split(/\*\*(.*?)\*\*/g);
+    return parts.map((part, j) =>
+      j % 2 === 1 ? <strong key={j}>{part}</strong> : part
+    );
+  };
+
   // 마크다운을 HTML로 변환 (간단한 변환)
   const renderMarkdown = (md: string) => {
     return md
@@ -205,25 +214,18 @@ export function LegalSheet({ initialOpen = null }: LegalSheetProps) {
         if (line.startsWith('# ')) {
           return <h1 key={i} className="legal-h1">{line.slice(2)}</h1>;
         }
-        // 볼드
-        if (line.includes('**')) {
-          const parts = line.split(/\*\*(.*?)\*\*/g);
-          return (
-            <p key={i} className="legal-p">
-              {parts.map((part, j) =>
-                j % 2 === 1 ? <strong key={j}>{part}</strong> : part
-              )}
-            </p>
-          );
-        }
-        // 리스트 (ul/ol 없이 <li>는 invalid HTML이므로 <p>로 렌더링)
+        // 리스트 (볼드보다 먼저 체크 - 리스트 내 볼드 지원)
         if (line.startsWith('- ')) {
-          return <p key={i} className="legal-li">• {line.slice(2)}</p>;
+          return <p key={i} className="legal-li">• {renderInline(line.slice(2))}</p>;
         }
         if (/^\d+\. /.test(line)) {
           const match = line.match(/^(\d+)\./);
           const num = match ? match[1] : '';
-          return <p key={i} className="legal-li">{num}. {line.replace(/^\d+\. /, '')}</p>;
+          return <p key={i} className="legal-li">{num}. {renderInline(line.replace(/^\d+\. /, ''))}</p>;
+        }
+        // 볼드 (리스트가 아닌 경우)
+        if (line.includes('**')) {
+          return <p key={i} className="legal-p">{renderInline(line)}</p>;
         }
         // 구분선
         if (line === '---') {
