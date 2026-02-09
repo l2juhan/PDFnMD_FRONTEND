@@ -17,14 +17,16 @@ interface FileUploaderProps {
   selectedFile: SelectedFileInfo | null;
   onFileSelect: (file: SelectedFileInfo) => void;
   onFileRemove: () => void;
-  disabled?: boolean;
+  selectDisabled?: boolean;  // 파일 선택 비활성화
+  removeDisabled?: boolean;  // 파일 제거 비활성화
 }
 
 export function FileUploader({
   selectedFile,
   onFileSelect,
   onFileRemove,
-  disabled,
+  selectDisabled,
+  removeDisabled,
 }: FileUploaderProps) {
   const inputRef = useRef<HTMLInputElement>(null);
   const [isDragOver, setIsDragOver] = useState(false);
@@ -68,7 +70,7 @@ export function FileUploader({
 
   const handleDragOver = (e: React.DragEvent) => {
     e.preventDefault();
-    if (!disabled) {
+    if (!selectDisabled) {
       setIsDragOver(true);
     }
   };
@@ -82,7 +84,7 @@ export function FileUploader({
     e.preventDefault();
     setIsDragOver(false);
 
-    if (disabled) return;
+    if (selectDisabled) return;
 
     const file = e.dataTransfer.files?.[0];
     if (file) {
@@ -99,14 +101,14 @@ export function FileUploader({
         accept=".pdf"
         onChange={handleInputChange}
         className="file-input"
-        disabled={disabled}
+        disabled={selectDisabled}
       />
 
       {/* 파일 선택 버튼 */}
       <button
         type="button"
         onClick={handleButtonClick}
-        disabled={disabled}
+        disabled={selectDisabled}
         className="file-select-btn"
       >
         <svg
@@ -133,13 +135,13 @@ export function FileUploader({
         onDragLeave={handleDragLeave}
         onDrop={handleDrop}
         className={`drop-zone ${isDragOver ? 'drag-over' : ''}`}
-        style={{ opacity: disabled ? 0.5 : 1 }}
+        style={{ opacity: selectDisabled ? 0.5 : 1 }}
       >
         {selectedFile ? (
           <SelectedFile
             file={selectedFile}
             onRemove={onFileRemove}
-            disabled={disabled}
+            disabled={removeDisabled}
           />
         ) : (
           <span className="drop-hint">또는 여기에 PDF를 드래그 앤 드롭</span>

@@ -47,10 +47,11 @@ export function Converter() {
     }
   }, [selectedFile, state.buttonState, startConversion, copyToClipboard, retry]);
 
-  const isUploaderDisabled =
-    state.buttonState === 'converting' ||
-    state.buttonState === 'completed' ||
-    state.buttonState === 'copied';
+  // 변환 중에만 파일 선택 비활성화 (새 파일 드래그/선택 방지)
+  const isFileSelectDisabled = state.buttonState === 'converting';
+
+  // 변환 중에만 파일 제거 버튼 비활성화 (완료/복사 상태에서는 제거 가능)
+  const isFileRemoveDisabled = state.buttonState === 'converting';
 
   return (
     <>
@@ -80,7 +81,8 @@ export function Converter() {
           selectedFile={selectedFile}
           onFileSelect={handleFileSelect}
           onFileRemove={handleFileRemove}
-          disabled={isUploaderDisabled}
+          selectDisabled={isFileSelectDisabled}
+          removeDisabled={isFileRemoveDisabled}
         />
 
         {/* 액션 버튼 */}
