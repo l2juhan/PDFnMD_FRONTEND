@@ -83,7 +83,7 @@ const TERMS_OF_SERVICE = `# 이용약관
 
 ---
 
-*문의: GitHub Issues*`;
+*문의: leejuhan0527@gmail.com*`;
 
 type SheetType = 'privacy' | 'terms' | null;
 
