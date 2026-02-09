@@ -13,70 +13,59 @@ interface ActionButtonProps {
   onClick: () => void;
 }
 
+// 상태별 설정 객체 (OCP: 새 상태 추가 시 여기만 수정)
+interface StateConfig {
+  className: string;
+  icon?: string;
+  showSpinner?: boolean;
+  label: string | ((progress: number) => string);
+}
+
+const STATE_CONFIG: Record<ButtonState, StateConfig> = {
+  idle: {
+    className: '',
+    label: '마크다운으로 변환',
+  },
+  converting: {
+    className: 'state-converting',
+    showSpinner: true,
+    label: (progress) => `변환 중… ${Math.round(progress)}%`,
+  },
+  completed: {
+    className: 'state-completed',
+    icon: '📋',
+    label: '클립보드에 복사',
+  },
+  copied: {
+    className: 'state-copied',
+    icon: '✓',
+    label: '복사 완료',
+  },
+  failed: {
+    className: 'state-failed',
+    label: '변환 실패 — 다시 시도',
+  },
+};
+
 export function ActionButton({
   state,
   progress,
   disabled,
   onClick,
 }: ActionButtonProps) {
-  // 상태별 클래스
-  const getStateClass = () => {
-    switch (state) {
-      case 'converting':
-        return 'state-converting';
-      case 'completed':
-        return 'state-completed';
-      case 'copied':
-        return 'state-copied';
-      case 'failed':
-        return 'state-failed';
-      default:
-        return '';
-    }
-  };
+  const config = STATE_CONFIG[state];
+  const label = typeof config.label === 'function'
+    ? config.label(progress)
+    : config.label;
 
-  // 상태별 텍스트
-  const getButtonContent = () => {
-    switch (state) {
-      case 'idle':
-        return '마크다운으로 변환';
-      case 'converting':
-        return (
-          <>
-            <div className="spinner" />
-            변환 중… {Math.round(progress)}%
-          </>
-        );
-      case 'completed':
-        return (
-          <>
-            <span>📋</span>
-            클립보드에 복사
-          </>
-        );
-      case 'copied':
-        return (
-          <>
-            <span>✓</span>
-            복사 완료
-          </>
-        );
-      case 'failed':
-        return '변환 실패 — 다시 시도';
-      default:
-        return '마크다운으로 변환';
-    }
-  };
-
-  const isDisabled =
-    disabled || state === 'converting' || (state === 'idle' && disabled);
+  const isDisabled = disabled || state === 'converting';
 
   return (
     <button
       type="button"
       onClick={onClick}
       disabled={isDisabled}
-      className={`action-btn ${getStateClass()}`}
+      className={`action-btn ${config.className}`}
     >
       {/* 프로그레스 fill */}
       <div
@@ -85,7 +74,11 @@ export function ActionButton({
       />
 
       {/* 버튼 내용 */}
-      <span className="btn-label">{getButtonContent()}</span>
+      <span className="btn-label">
+        {config.showSpinner && <div className="spinner" />}
+        {config.icon && <span>{config.icon}</span>}
+        {label}
+      </span>
     </button>
   );
 }
