@@ -3,7 +3,7 @@
  * React Island (client:load)
  */
 
-import { useState, useEffect, useCallback, useRef } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 
 // 마크다운 콘텐츠
 const PRIVACY_POLICY = `# 개인정보처리방침
@@ -194,11 +194,15 @@ export function LegalSheet({ initialOpen = null }: LegalSheetProps) {
   }, [openSheetByType]);
 
   // 인라인 볼드 처리 함수
-  const renderInline = (text: string) => {
+  const renderInline = (text: string): React.ReactNode => {
     if (!text.includes('**')) return text;
     const parts = text.split(/\*\*(.*?)\*\*/g);
-    return parts.map((part, j) =>
-      j % 2 === 1 ? <strong key={j}>{part}</strong> : part
+    return (
+      <>
+        {parts.map((part, j) =>
+          j % 2 === 1 ? <strong key={j}>{part}</strong> : part
+        )}
+      </>
     );
   };
 
