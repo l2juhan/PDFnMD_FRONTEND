@@ -832,3 +832,13 @@ body {
     transform: translateY(100%);
   }
 }
+
+/* 모션 민감 사용자를 위한 애니메이션 비활성화 (WCAG 2.1 SC 2.3.3) */
+@media (prefers-reduced-motion: reduce) {
+  .legal-overlay-entering,
+  .legal-overlay-leaving,
+  .legal-sheet-entering,
+  .legal-sheet-leaving {
+    animation: none;
+  }
+}
