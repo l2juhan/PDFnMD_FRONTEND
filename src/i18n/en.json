@@ -16,7 +16,7 @@
     "title": "Convert File",
     "description": "Upload a PDF to convert it to Notion-compatible Markdown",
     "selectFile": "Select File",
-    "fileHint": "PDF · Max 50MB",
+    "fileHint": "PDF · Max 20MB",
     "dropHint": "or drag and drop a PDF here",
     "convert": "Convert to Markdown",
     "converting": "Converting…",
@@ -56,8 +56,8 @@
         "description": "Converted to GFM format, so formatting is preserved when pasting to Notion."
       },
       {
-        "title": "24-Hour Storage",
-        "description": "Converted images are stored in cloud for 24 hours. Paste within that time."
+        "title": "Permanent Storage",
+        "description": "Converted images are permanently stored in cloud."
       },
       {
         "title": "Free",
@@ -75,15 +75,15 @@
       },
       {
         "question": "Where are images stored?",
-        "answer": "Images are stored in Cloudflare R2 cloud storage. They're auto-deleted after 24 hours. When you paste to Notion, Notion copies images to its own servers."
+        "answer": "Images are permanently stored in Cloudflare R2 cloud storage. When you paste to Notion, Notion copies images to its own servers."
       },
       {
         "question": "Is there a file size limit?",
-        "answer": "You can upload files up to 50MB."
+        "answer": "You can upload files up to 20MB."
       },
       {
         "question": "Is my uploaded PDF safe?",
-        "answer": "PDF files are immediately deleted from our server after conversion. We don't store or analyze them."
+        "answer": "PDF files are automatically deleted from our server after 24 hours. We don't store or analyze them."
       }
     ]
   },

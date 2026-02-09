@@ -13,6 +13,7 @@ import HowToUse from '../components/HowToUse.astro';
 import Features from '../components/Features.astro';
 import FAQ from '../components/FAQ.astro';
 import Footer from '../components/Footer.astro';
+import { LegalSheet } from '../components/LegalSheet';
 ---
 
 <Layout>
@@ -48,4 +49,7 @@ import Footer from '../components/Footer.astro';
     <!-- 푸터 -->
     <Footer />
   </div>
+
+  <!-- 법적 문서 시트 (React Island) -->
+  <LegalSheet client:load />
 </Layout>

@@ -3,7 +3,7 @@
  * 에러 인터셉터 + Toast 알림
  */
 
-import axios, { AxiosError, type InternalAxiosRequestConfig } from 'axios';
+import axios, { type AxiosError, type InternalAxiosRequestConfig } from 'axios';
 import toast from 'react-hot-toast';
 import i18n from '../i18n';
 import type { ApiError } from '../types';
